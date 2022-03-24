@@ -1,0 +1,17 @@
+clear
+clc
+
+K =1;
+tau= 1.35;
+s = tf('s');
+G = 20000/(tau*s+1)
+[B, t] = step(G);
+
+A=load('rat1.txt');
+plot(A(:,2)-3449,A(:,1))
+hold on
+plot(1000*t,B)
+hold off
+
+t=A(:,2)-3449;
+u=20000*ones(254)
