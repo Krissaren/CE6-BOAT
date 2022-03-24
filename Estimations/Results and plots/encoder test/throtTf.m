@@ -1,7 +1,7 @@
 clear
 clc
 
-k =20000;
+k =1;
 tau= 1.301;
 s = tf('s');
 G = k/(tau*s+1)
@@ -12,13 +12,15 @@ A2=load('throt4.txt');
 A3=load('throt5.txt');
 
 figure(1)
-plot((A1(:,2)-A1(1,2))/1000,A1(:,1))
+plot((A1(:,2)-A1(1,2))/1000,A1(:,1)/20000)
 hold on
 plot(t,B)
 xlabel('Time [s]') 
-ylabel('Encoder value') 
+ylabel('Amplitude') 
 grid on
-xlim([0 9])
+xlim([0 7])
+ylim([0 1.2])
+legend({'Actual step resonse','1st order approximation'},'Location','southeast')
 hold off
 
 figure(2)
