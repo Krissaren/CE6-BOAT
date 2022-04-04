@@ -25,7 +25,7 @@ ylabel('Amplitude')
 grid on
 xlim([0 6])
 ylim([0 1.2])
-legend({'Actual step resonse','1st order approximation'},'Location','southeast')
+legend({'Measured step resonse','1st order approximation'},'Location','southeast')
 hold off
 
 %%
