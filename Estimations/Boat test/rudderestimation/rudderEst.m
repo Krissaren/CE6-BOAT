@@ -2,14 +2,14 @@ clear
 clc
 
 k =1;
-%A1 tau =1
-%A2 tau = 0.9
+%A1 tau =0.95
+%A2 tau = 0.901
 %A3 tau = 1.301
 %A4 tau = 2.601
 %A5 tau = 5.102
 %A6 tau = 7.553
 
-tau= .9;
+tau= .901;
 s = tf('s');
 G = k/(tau*s+1)
 [B, t] = step(G);
@@ -30,7 +30,7 @@ ylabel('Amplitude')
 grid on
 xlim([0 7])
 ylim([0 1.2])
-legend({'Actual step resonse','1st order approximation'},'Location','southeast')
+legend({'Measured step resonse','1st order approximation'},'Location','southeast')
 hold off
 %%
 figure(2)
@@ -44,7 +44,7 @@ plot((A6(:,2)-A6(1,2))/1000,A6(:,1)/120000)
 xlabel('Time [s]') 
 ylabel('Amplitude') 
 grid on
-xlim([0 10])
+xlim([0 8])
 ylim([0 1.2])
 legend({'Step = 5000','Step = 10000', 'Step = 20000', 'Step = 40000', 'Step = 80000', 'Step = 120000'},'Location','southeast')
 hold off
