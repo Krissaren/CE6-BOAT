@@ -39,16 +39,7 @@ class msg_gpvtg:
 
     vel = np.float32
 
-def logdataGps():
-	global i
-	i =1
-	f=None
-	while f is None:
-		try:
-			os.mkdir("data/dataFolder" + str(i))
-			f=1
-		except:
-			i += 1
+def logdataGps(i):
 	f1=os.path.join("data/dataFolder"+str(i), "gpggaGpsData.txt")
 	f2=os.path.join("data/dataFolder"+str(i), "gpvtgGpsData.txt")
 	return f1, f2
@@ -202,28 +193,26 @@ def next(string, number):
     return string[index1:index2]
 
 
-def talkerGps():
-
-	f1, f2 = logdataGps()
-	#while(1):
-	f = open(f1, "a")
-    	f.write(str(msg1)+"\n")
-  	f.close()
-    		serial_data=serial_reader()
-    		#print(serial_data)
-    		if serial_data[0:6] == "$GPGGA":
-    			msg1 = gpgga(serial_data)
-    			print(msg1)
-    			f = open(f1, "a")
-    			f.write(str(msg1)+"\n")
-    			f.close()
-        	    	
-    		if serial_data[0:6] == "$GPVTG":
-    			msg2 = gpvtg(serial_data)
-    			#print(msg2)
-    			f = open(f2, "a")
-    			f.write(str(msg2)+"\n")
-    			f.close()
+def talkerGps(f1, f2):
+    #while(1):
+    f = open(f1, "a")
+    f.write("hey"+"\n")
+    f.close()
+    serial_data=serial_reader()
+    #print(serial_data)
+    if serial_data[0:6] == "$GPGGA":
+        msg1 = gpgga(serial_data)
+        print(msg1)
+        f = open(f1, "a")
+        f.write(str(msg1)+"\n")
+        f.close()
             
+    if serial_data[0:6] == "$GPVTG":
+        msg2 = gpvtg(serial_data)
+        #print(msg2)
+        f = open(f2, "a")
+        f.write(str(msg2)+"\n")
+        f.close()
+    
 
 

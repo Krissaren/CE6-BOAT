@@ -19,16 +19,7 @@ class msg:
     incy = np.float32
     incz = np.float32
 
-def logdataImu():
-	global i
-	i =1
-	f=None
-	while f is None:
-		try:
-			os.mkdir("data/dataFolder" + str(i))
-			f=1
-		except:
-			i += 1
+def logdataImu(i):
 	f1=os.path.join("data/dataFolder"+str(i), "gyroImuData.txt")
 	f2=os.path.join("data/dataFolder"+str(i), "accImuData.txt")
 	f3=os.path.join("data/dataFolder"+str(i), "incImuData.txt")
@@ -116,34 +107,26 @@ def serial_reader2():
     return data1, data2, data3
 
 
-def talkerImu():
+def talkerImu(f1, f2, f3):
     msgnew = msg
     msgold = msg
-    f1, f2, f3 = logdataImu()
-    while(1):
-    	serial_data=serial_reader()
-    	#print(serial_data)
-    	serial_data1, serial_data2, serial_data3 = serial_reader2()
-    	msgold = msgnew
-    	msgnew = format(serial_data1, serial_data2, serial_data3)
-    	#rospy.loginfo(msg)
-    	#print(serial_data1)
-    	#print(serial_data2)
-    	#print(serial_data3)
-    	f = open(f1, "a")
-    	f.write(str(serial_data1).strip("[]")+"\n")
-    	f.close()
-    	f = open(f2, "a")
-    	f.write(str(serial_data2).strip("[]")+"\n")
-    	f.close()
-    	f = open(f3, "a")
-    	f.write(str(serial_data3).strip("[]")+"\n")
-    	f.close()
-    	if msgnew.accx-msgold.accx < 0.5 and msgnew.accy-msgold.accy < 0.5 and msgnew.accz-msgold.accz < 0.5 and msgnew.incx-msgold.incx < 0.5 and msgnew.incy-msgold.incy < 0.5 and msgnew.incz-msgold.incz < 0.5:
-    		if msgnew.accx-msgold.accx > -0.5 and msgnew.accy-msgold.accy  > -0.5 and msgnew.accz-msgold.accz  > -0.5 and msgnew.incx-msgold.incx  > -0.5 and msgnew.incy-msgold.incy  > -0.5 and msgnew.incz-msgold.incz  > -0.5:
-    			print("")
-    			
-    			#print(msgnew)
-
-
-
+    
+    #while(1):
+    serial_data=serial_reader()
+	#print(serial_data)
+    serial_data1, serial_data2, serial_data3 = serial_reader2()
+    msgold = msgnew
+    msgnew = format(serial_data1, serial_data2, serial_data3)
+    #rospy.loginfo(msg)
+    #print(serial_data1)
+    #print(serial_data2)
+    #print(serial_data3)
+    f = open(f1, "a")
+    f.write(str(serial_data1).strip("[]")+"\n")
+    f.close()
+    f = open(f2, "a")
+    f.write(str(serial_data2).strip("[]")+"\n")
+    f.close()
+    f = open(f3, "a")
+    f.write(str(serial_data3).strip("[]")+"\n")
+    f.close()
