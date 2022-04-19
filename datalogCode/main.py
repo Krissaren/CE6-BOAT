@@ -3,8 +3,11 @@ import time
 import numpy as np
 import serial
 import os.path
+from datetime import datetime
 from imuOurVersion import *
 from gpsOurVersion import * 
+from rudOurVersion import *
+from throtOurVersion import *
 
 i = 1
 
@@ -20,9 +23,16 @@ def makeFolder():
 
 if __name__ == '__main__':
     makeFolder()
-    f1, f2 = logdataGps(i)
-    f3, f4, f5 = logdataImu(i)
+    fGps1, fGps2 = logdataGps(i)
+    fImu1, fImu2, fImu3 = logdataImu(i)
+    fRud1 = logdataRud(i)
+    fThrot1 = logdataThrot(i)
+    
     while(1):
-        talkerGps(f1, f2)
-        talkerImu(f3, f4, f5)
-        print('reading')
+        talkerGps(fGps1, fGps2)
+        talkerImu(fImu1, fImu2, fImu3)
+        talkerRud(fRud1)
+        talkerThrot(fThrot1)
+
+        now = datetime.now()
+        print(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond))

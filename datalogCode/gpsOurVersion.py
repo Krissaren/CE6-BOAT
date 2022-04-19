@@ -49,7 +49,6 @@ def logdataGps(i):
 def serial_reader():
     return gpsPort.readline()
 
-
 def gpgga(data):
     string = data.decode('UTF-8')
     msg = msg_gpgga
@@ -163,12 +162,14 @@ def gpvtg(data):
     string = str(data)
     msg = msg_gpvtg
     msg.time = int(round(time.time() * 1000))
+    
     index1 = 0
     index2 = string.find("N")
     index1 = index2
     index2 = string.find(",", index2 + 1)
     index1 = index2
     index2 = string.find(",", index2 + 1)
+    
     if string[index1 + 1:index2] == "":
         msg.vel = float(0)
     else:
@@ -189,6 +190,7 @@ def next(string, number):
 
 def talkerGps(f1, f2):
     serial_data=serial_reader()
+    
     if serial_data[0:6].decode('UTF-8') == "$GPGGA":
         msg1 = gpgga(serial_data)
         f = open(f1, "a")

@@ -3,6 +3,7 @@ import time
 import numpy as np
 import serial
 import os.path
+from datetime import datetime
 
 i = 0
 imuPort = serial.Serial("/dev/ttyUSB1", baudrate=921600, timeout=3.0)
@@ -73,6 +74,7 @@ def serial_reader2():
     raw1 = None
     raw2 = None
     raw3 = None
+    
     while raw3 != b'\x0d' or raw2 != b'\x0a' or raw1 != b'\x93':  # 0d and 0a is end of a line and 90 is msg id
         raw3 = raw2
         raw2 = raw1
@@ -95,17 +97,22 @@ def talkerImu(f1, f2, f3):
     msgnew = msg
     msgold = msg
     
-    #while(1):
     serial_data=serial_reader()
     serial_data1, serial_data2, serial_data3 = serial_reader2()
+    
     msgold = msgnew
     msgnew = format(serial_data1, serial_data2, serial_data3)
+    
+    now = datetime.now()
+    
     f = open(f1, "a")
-    f.write(str(serial_data1).strip("[]")+"\n")
+    f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data1).strip("[]")+"\n")
     f.close()
+    
     f = open(f2, "a")
-    f.write(str(serial_data2).strip("[]")+"\n")
+    f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data2).strip("[]")+"\n")
     f.close()
+    
     f = open(f3, "a")
-    f.write(str(serial_data3).strip("[]")+"\n")
+    f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data3).strip("[]")+"\n")
     f.close()
