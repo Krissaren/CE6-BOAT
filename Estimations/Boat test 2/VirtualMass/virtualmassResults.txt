@@ -1,0 +1,44 @@
+//Every data set is plotted through the virtualmass.m file and an acceleration and time interval is found.
+
+throt11866E.txt: 
+18.05, 3.17618
+18.85, 2.50689
+VMass = 597.6483
+
+throt11921E.txt:
+9.55, 3.03675
+10.25, 2.60566
+VMass = 811.8766
+
+throt11984W.txt:
+13.95, 2.09945
+14.5, 1.63748
+VMass = 595.2767
+
+throt12098W.txt:
+23.6, 2.0017
+23.95, 1.7594
+VMass = 722.2452
+
+throt15003W.txt:
+18.25, 2.13288 
+18.9, 1.35556
+VMass = 832.0254
+
+throt15012W.txt:
+20.4, 2.06549
+20.65, 1.7666
+VMass = 832.2460
+
+throt15058E.txt:
+10.05, 3.24305
+10.25, 3.00178
+VMass = 824.8021
+
+throt15084E.txt:
+11.75, 3.20962
+12.15, 2.70855
+VMass = 794.3002
+
+VMassAvg = (597.6483 + 811.8766 + 595.2767 + 722.2452 + 832.0254 + 832.2460 + 824.8021 + 794.3002)/8
+= 751.3025
