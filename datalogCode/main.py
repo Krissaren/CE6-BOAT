@@ -5,6 +5,7 @@ import serial
 import os.path
 from imuOurVersion import *
 from gpsOurVersion import * 
+
 i = 1
 
 def makeFolder():
@@ -24,3 +25,4 @@ if __name__ == '__main__':
     while(1):
         talkerGps(f1, f2)
         talkerImu(f3, f4, f5)
+        print('reading')

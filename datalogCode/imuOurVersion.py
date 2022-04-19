@@ -5,7 +5,7 @@ import serial
 import os.path
 
 i = 0
-imuPort = serial.Serial("/dev/ttyUSB0", baudrate=921600, timeout=3.0)
+imuPort = serial.Serial("/dev/ttyUSB1", baudrate=921600, timeout=3.0)
 
 class msg:
     time = np.uint64 
@@ -28,7 +28,6 @@ def logdataImu(i):
 def serial_reader():
     data = None
     raw = imuPort.readline()
-    #print(raw)
     if len(raw) != 0:
         data = ":".join("{:02x}".format(c) for c in raw)
     return data
@@ -39,17 +38,9 @@ def format(data1, data2, data3):
     string = str(data1)
     length = len(string)
     string = string[1:length - 1]
-    # print("######")
-    # print(string)
 
     index1 = int(string.find(" ", 6))
     index2 = int(string.rfind(" ", index1 + 1, length - 10))
-    # print("1: "+str(index1))
-    # print("2: "+str(index2))
-
-    # print(string[0:index1])
-    # print(string[index1+1:index2])
-    # print(string[index2:length])
 
     msg.time = int(round(time.time() * 1000))
     msg.gyrox = float(string[0:index1])
@@ -88,9 +79,7 @@ def serial_reader2():
         raw1 = imuPort.read(1)
 
     raw = imuPort.read(30)
-    
-    # data=":".join("{:02x}".format(ord(c)) for c in raw)
-    # data=(np.fromstring(raw[0:3] + b'\x00' + raw[3:6] + b'\x00' + raw[6:9] + b'\x00',
+
     data1 = (np.frombuffer(raw[0:3] + b'\x00' + raw[3:6] + b'\x00' + raw[6:9] + b'\x00', dtype='>i')
              .astype(np.float32) / (2 ** (21 + 8)))
 
@@ -99,11 +88,6 @@ def serial_reader2():
 
     data3 = (np.frombuffer(raw[20:23] + b'\x00' + raw[23:26] + b'\x00' + raw[26:29] + b'\x00', dtype='>i')
              .astype(np.float32) / (2 ** (22 + 8)))
-
-    #print("\n#####################\n")
-    #print(data1)
-    #print(data2)
-    #print(data3)
     return data1, data2, data3
 
 
@@ -113,14 +97,9 @@ def talkerImu(f1, f2, f3):
     
     #while(1):
     serial_data=serial_reader()
-	#print(serial_data)
     serial_data1, serial_data2, serial_data3 = serial_reader2()
     msgold = msgnew
     msgnew = format(serial_data1, serial_data2, serial_data3)
-    #rospy.loginfo(msg)
-    #print(serial_data1)
-    #print(serial_data2)
-    #print(serial_data3)
     f = open(f1, "a")
     f.write(str(serial_data1).strip("[]")+"\n")
     f.close()

@@ -4,8 +4,10 @@ import time
 import numpy as np
 import serial
 import os.path
+
 i = 1
-gpsPort = serial.Serial("/dev/ttyUSB1", baudrate=115200, timeout=3.0)
+gpsPort = serial.Serial("/dev/ttyUSB0", baudrate=115200, timeout=3.0)
+
 class msg_gpgga:
     time = np.uint64 
     message_id = string
@@ -40,19 +42,16 @@ class msg_gpvtg:
     vel = np.float32
 
 def logdataGps(i):
-	f1=os.path.join("data/dataFolder"+str(i), "gpggaGpsData.txt")
-	f2=os.path.join("data/dataFolder"+str(i), "gpvtgGpsData.txt")
-	return f1, f2
+    f1=os.path.join("data/dataFolder"+str(i), "gpggaGpsData.txt")
+    f2=os.path.join("data/dataFolder"+str(i), "gpvtgGpsData.txt")
+    return f1, f2
 
 def serial_reader():
-    #while port.in_waiting == 0:
-        #pass
     return gpsPort.readline()
 
 
 def gpgga(data):
-    string = str(data)
-    # length = len(string)
+    string = data.decode('UTF-8')
     msg = msg_gpgga
 
     index1 = 0
@@ -157,17 +156,13 @@ def gpgga(data):
         msg.station_id = str(0)
     else:
         msg.station_id = str(string[index1+1:index2])
-
     return msg
 
 
 def gpvtg(data):
     string = str(data)
-    # length = len(string)
     msg = msg_gpvtg
-
     msg.time = int(round(time.time() * 1000))
-
     index1 = 0
     index2 = string.find("N")
     index1 = index2
@@ -178,7 +173,6 @@ def gpvtg(data):
         msg.vel = float(0)
     else:
         msg.vel = float(string[index1 + 1:index2])
-
     msg.utc_seconds = float(0)
 
     return msg
@@ -194,24 +188,17 @@ def next(string, number):
 
 
 def talkerGps(f1, f2):
-    #while(1):
-    f = open(f1, "a")
-    f.write("hey"+"\n")
-    f.close()
     serial_data=serial_reader()
-    #print(serial_data)
-    if serial_data[0:6] == "$GPGGA":
+    if serial_data[0:6].decode('UTF-8') == "$GPGGA":
         msg1 = gpgga(serial_data)
-        print(msg1)
         f = open(f1, "a")
-        f.write(str(msg1)+"\n")
+        f.write(serial_data.decode('UTF-8').strip('\r\n')+"\n")
         f.close()
             
-    if serial_data[0:6] == "$GPVTG":
+    if serial_data[0:6].decode('UTF-8') == "$GPVTG":
         msg2 = gpvtg(serial_data)
-        #print(msg2)
         f = open(f2, "a")
-        f.write(str(msg2)+"\n")
+        f.write(serial_data.decode('UTF-8').strip('\r\n')+"\n")
         f.close()
     
 
