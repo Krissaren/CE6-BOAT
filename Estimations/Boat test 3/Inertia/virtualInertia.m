@@ -2,7 +2,7 @@ clear
 clc
 close all
 
-txtname = ('throt12967rud60000.txt');
+txtname = ('throt11937rud189212.log');
 f = fopen(txtname);
 unParsedNMEAdata = fread(f);
 pnmea = nmeaParser("MessageIDs",["VTG","GGA"]);
@@ -24,7 +24,7 @@ for i = 1:1:m-1 %Removes 360°->0°
         AngPos(i+1) = AngPos(i+1)-360;
     end
 end 
-AngPos = movmean(AngPos,20);
+AngPosMean = movmean(AngPos,20);
 
 for i = 1:length(AngPos)-1 %Angular velocity. Could use gradient()
     AngSpeed(i) = (AngPos(i+1)-AngPos(i))/(secs(i+1)-secs(i));
@@ -47,13 +47,15 @@ inertia = tau/readAccel
 
 %AngSpeed = gradient(AngPos);
 
-plot(secs(1:744),AngSpeed)
+plot(secs,AngPos)
+%plot(secs(1:length(AngSpeed)),AngSpeed)
 %plot(secs(1:743),AngAcc)
 hold on
 grid
-ylabel = ('Degrees [°]');
-xlabel = ('Time [s]');
-legend = (txtname);
+ylabel('Degrees [°]');
+xlabel('Time [s]');
+legend(txtname);
 %plot(secs,AngPos)
-%plot(secs(1:743),AngAcc)
+%plot(secs(1:length(AngAcc)),AngAcc)
+plot(secs(1:length(AngSpeed)),AngSpeed)
 hold off
