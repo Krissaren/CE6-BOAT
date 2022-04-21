@@ -192,15 +192,17 @@ def talkerGps(f1, f2):
     serial_data=serial_reader()
     
     if serial_data[0:6].decode('UTF-8') == "$GPGGA":
-        msg1 = gpgga(serial_data)
+        #msg1 = gpgga(serial_data)
         f = open(f1, "a")
-        f.write(serial_data.decode('UTF-8').strip('\r\n')+"\n")
+        #f.write(serial_data.decode('UTF-8', 'ignore').strip('\r\n')+"\n")
+        f.write(str(serial_data).strip("b'")+"\n")
         f.close()
             
     if serial_data[0:6].decode('UTF-8') == "$GPVTG":
-        msg2 = gpvtg(serial_data)
+        #msg2 = gpvtg(serial_data)
         f = open(f2, "a")
-        f.write(serial_data.decode('UTF-8').strip('\r\n')+"\n")
+        #f.write(serial_data.decode('UTF-8', 'ignore').strip('\r\n')+"\n")
+        f.write(str(serial_data).strip("b'")+"\n")
         f.close()
     
 
