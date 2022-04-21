@@ -1,0 +1,73 @@
+//data files were last edited on 21-04 when this was done
+
+throt10951(1).log:
+MeanSpeed = 1.9435
+MeanHeading = 76.6374
+Force = 290.2000
+DragConst = 153.6593
+
+throt10951(2).log: //gap in early data. Used homemade secs
+MeanSpeed = 2.0737
+MeanHeading = 70.6857
+Force = 290.2000
+DragConst = 134.9693
+
+throt10951(3).log: //corrupted data, but assumed to be fine with average. Just removed NaN
+MeanSpeed = 2.8887
+MeanHeading = 282.8328
+Force = 290.2000
+DragConst = 69.5542 //VERY LOW DRAG
+
+throt10951(4).log: //same as above
+MeanSpeed = 2.9581
+MeanHeading = 282.6088
+Force = 290.2000
+DragConst = 66.3278 //ALSO VERY LOW
+
+throt12984(1).log: 
+MeanSpeed = 3.1057
+MeanHeading = 287.9346
+Force = 639.6000
+DragConst = 132.6247
+
+throt12984(2).log:
+MeanSpeed = 3.1224
+MeanHeading = 290.8253
+Force = 639.6000
+DragConst = 131.2077
+
+throt12997(1).log:
+MeanSpeed = 2.2450
+MeanHeading = 87.3312
+Force = 639.6000
+DragConst = 253.8106
+
+throt12997(2).log:
+MeanSpeed = 2.1379
+MeanHeading = 116.0044
+Force = 639.6000
+DragConst = 279.8870
+
+throt15006(1).log:
+MeanSpeed = 3.1957
+MeanHeading = 295.6201
+Force = 989
+DragConst = 193.6841
+
+throt15006(2).log:
+MeanSpeed = 3.2076
+MeanHeading = 300.8677
+Force = 989
+DragConst = 192.2536
+
+throt15006(3).log:
+MeanSpeed = 2.5350
+MeanHeading = 120.5476
+Force = 989
+DragConst = 307.8076
+
+throt15006(4).log:
+MeanSpeed = 2.5377
+MeanHeading = 119.1458
+Force = 989
+DragConst = 307.1545
