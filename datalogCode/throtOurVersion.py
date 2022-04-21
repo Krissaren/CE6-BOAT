@@ -2,9 +2,10 @@
 import time
 import serial
 import numpy as np
+import os.path
 from datetime import datetime
 
-rudPort = serial.Serial("/dev/throt", baudrate=115200, timeout=3.0)
+throtPort = serial.Serial("/dev/ttyACM1", baudrate=115200, timeout=3.0)
 
 class motordata:
 	time = np.uint64
@@ -15,7 +16,7 @@ def logdataThrot(i):
 	return os.path.join("data/dataFolder"+str(i), "throtData.txt")
 	
 def serial_reader():
-        return port.readline()
+        return throtPort.readline()
 
 def format(data):
         print(data)
@@ -30,8 +31,9 @@ def format(data):
 
 def talkerThrot(f1):
 	serial_data = serial_reader()
+	now = datetime.now()
 	f = open(f1, "a")
-	f.write(tr(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data+"\n")
+	f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data.decode('UTF-8'))
 	f.close()
     	
 	#print("#"+str(set_point))
