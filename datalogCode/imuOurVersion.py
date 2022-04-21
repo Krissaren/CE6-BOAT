@@ -81,7 +81,7 @@ def serial_reader2():
         raw1 = imuPort.read(1)
 
     raw = imuPort.read(30)
-
+    print(raw)
     data1 = (np.frombuffer(raw[0:3] + b'\x00' + raw[3:6] + b'\x00' + raw[6:9] + b'\x00', dtype='>i')
              .astype(np.float32) / (2 ** (21 + 8)))
 
@@ -90,6 +90,9 @@ def serial_reader2():
 
     data3 = (np.frombuffer(raw[20:23] + b'\x00' + raw[23:26] + b'\x00' + raw[26:29] + b'\x00', dtype='>i')
              .astype(np.float32) / (2 ** (22 + 8)))
+    print(data1)
+    print(data2)
+    print(data3)
     return data1, data2, data3
 
 
