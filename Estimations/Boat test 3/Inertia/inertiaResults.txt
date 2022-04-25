@@ -1,0 +1,16 @@
+RudderEnc: (some are scaled to 212 000 and some 228 000 max) 
+0 = 32° (whatever) 
+44000 = 16° (212 000 max) 
+ 
+132000 = -16° (212 000 max) 
+142000 = -16° (228 000 max) 
+ 
+176000 = -32° (212 000 max) 
+189200 = -32° (228 000 max) 
+ 
+ 
+throt11937rud189212.log: 
+ 
+ 
+throt11993rud0.log: 
+inertia = 3.0862 

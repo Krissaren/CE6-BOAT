@@ -66,7 +66,7 @@ grid
 ylabel('Degrees [°]');
 xlabel('Time [s]');
 legend(txtname);
-%plot(secs,AngPos)
-plot(secs(1:length(AngAcc)),AngAcc)
+plot(secs,AngPos)
+%plot(secs(1:length(AngAcc)),AngAcc)
 %plot(secs(1:length(AngSpeed)),AngSpeed)
 hold off
