@@ -11,23 +11,16 @@ gpsPort = serial.Serial("/dev/ttyUSB0", baudrate=115200, timeout=3.0)
 class msg_gpgga:
     time = np.uint64 
     message_id = string
-
-    # UTC seconds from midnight
-    utc_seconds = np.float64
-
+    utc_seconds = np.float64 # UTC seconds from midnight
     lat = np.float64
     lon = np.float64
-
     lat_dir = string
     lon_dir = string
-
     gps_qual = np.uint32
-
     num_sats = np.uint32
     hdop = np.float32
     alt = np.float32
     altitude_units = string
-
     undulation = np.float32
     undulation_units = string
     diff_age = np.float32
@@ -35,15 +28,13 @@ class msg_gpgga:
 
 class msg_gpvtg:
     time = np.uint64 
-
-    # UTC seconds from midnight
-    utc_seconds = np.float64
-
+    utc_seconds = np.float64 # UTC seconds from midnight
     vel = np.float32
 
 def logdataGps(i):
-    f1=os.path.join("data/dataFolder"+str(i), "gpggaGpsData.txt")
-    f2=os.path.join("data/dataFolder"+str(i), "gpvtgGpsData.txt")
+    f1 = os.path.join("data/dataFolder"+str(i), "gpggaGpsData.txt")
+    f2 = os.path.join("data/dataFolder"+str(i), "gpvtgGpsData.txt")
+    
     return f1, f2
 
 def serial_reader():
@@ -182,28 +173,23 @@ def gpvtg(data):
 def next(string, number):
     index1 = 0
     index2 = 0
+
     for i in range(number):
         index1 = index2
         index2 = string.find(",",index2)
+
     return string[index1:index2]
 
 
 def talkerGps(f1, f2):
-    serial_data=serial_reader()
+    serial_data = serial_reader()
     
     if serial_data[0:6].decode('UTF-8') == "$GPGGA":
         #msg1 = gpgga(serial_data)
-        f = open(f1, "a")
         #f.write(serial_data.decode('UTF-8', 'ignore').strip('\r\n')+"\n")
-        f.write(str(serial_data).strip("b'")+"\n")
-        f.close()
+        f1.write(str(serial_data).strip("b'")+"\n")
             
     if serial_data[0:6].decode('UTF-8') == "$GPVTG":
         #msg2 = gpvtg(serial_data)
-        f = open(f2, "a")
         #f.write(serial_data.decode('UTF-8', 'ignore').strip('\r\n')+"\n")
-        f.write(str(serial_data).strip("b'")+"\n")
-        f.close()
-    
-
-
+        f2.write(str(serial_data).strip("b'")+"\n")

@@ -19,22 +19,23 @@ def serial_reader():
 	return rudPort.readline()
 
 def format(data):
-	print(data)
+	#print(data)
 	msg = motordata()
 	msg.time = int(round(time.time() * 1000))
+
 	try:
 	    msg.encoder = int(data)
 	except:
 	    msg.encoder = set_point
+
 	msg.set_point = set_point
 	return msg
 
 def talkerRud(f1):
-    	serial_data = serial_reader()
-    	now = datetime.now()
-    	f = open(f1, "a")
-    	f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data.decode('UTF-8'))
-    	f.close()
-    	
-    	#print("#"+str(set_point))
-    	#port.write(bytes(set_point))
+	serial_data = serial_reader()
+	now = datetime.now()
+	
+	f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data.decode('UTF-8'))
+	
+	#print("#"+str(set_point))
+	#port.write(bytes(set_point))
