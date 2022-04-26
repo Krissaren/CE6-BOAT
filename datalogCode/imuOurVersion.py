@@ -21,16 +21,19 @@ class msg:
     incz = np.float32
 
 def logdataImu(i):
-	f1=os.path.join("data/dataFolder"+str(i), "gyroImuData.txt")
-	f2=os.path.join("data/dataFolder"+str(i), "accImuData.txt")
-	f3=os.path.join("data/dataFolder"+str(i), "incImuData.txt")
-	return f1, f2, f3
+	f1 = os.path.join("data/dataFolder"+str(i), "gyroImuData.txt")
+	f2 = os.path.join("data/dataFolder"+str(i), "accImuData.txt")
+	f3 = os.path.join("data/dataFolder"+str(i), "incImuData.txt")
+	
+    return f1, f2, f3
 	
 def serial_reader():
     data = None
     raw = imuPort.readline()
+
     if len(raw) != 0:
         data = ":".join("{:02x}".format(c) for c in raw)
+    
     return data
 
 
@@ -81,7 +84,9 @@ def serial_reader2():
         raw1 = imuPort.read(1)
 
     raw = imuPort.read(30)
-    print(raw)
+    
+    #print(raw)
+
     data1 = (np.frombuffer(raw[0:3] + b'\x00' + raw[3:6] + b'\x00' + raw[6:9] + b'\x00', dtype='>i')
              .astype(np.float32) / (2 ** (21 + 8)))
 
@@ -90,9 +95,11 @@ def serial_reader2():
 
     data3 = (np.frombuffer(raw[20:23] + b'\x00' + raw[23:26] + b'\x00' + raw[26:29] + b'\x00', dtype='>i')
              .astype(np.float32) / (2 ** (22 + 8)))
-    print(data1)
-    print(data2)
-    print(data3)
+    
+    #print(data1)
+    #print(data2)
+    #print(data3)
+    
     return data1, data2, data3
 
 
@@ -100,7 +107,7 @@ def talkerImu(f1, f2, f3):
     msgnew = msg
     msgold = msg
     
-    serial_data=serial_reader()
+    serial_data = serial_reader()
     serial_data1, serial_data2, serial_data3 = serial_reader2()
     
     msgold = msgnew
@@ -108,14 +115,6 @@ def talkerImu(f1, f2, f3):
     
     now = datetime.now()
     
-    f = open(f1, "a")
-    f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data1).strip("[]")+"\n")
-    f.close()
-    
-    f = open(f2, "a")
-    f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data2).strip("[]")+"\n")
-    f.close()
-    
-    f = open(f3, "a")
-    f.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data3).strip("[]")+"\n")
-    f.close()
+    f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data1).strip("[]")+"\n")
+    f2.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data2).strip("[]")+"\n")
+    f3.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data3).strip("[]")+"\n")
