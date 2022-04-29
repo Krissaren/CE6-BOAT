@@ -6,7 +6,7 @@ import os.path
 from datetime import datetime
 
 i = 0
-imuPort = serial.Serial("/dev/ttyUSB1", baudrate=921600, timeout=3.0)
+imuPort = serial.Serial("/dev/IMU", baudrate=921600, timeout=3.0)
 
 class msg:
     time = np.uint64 
@@ -21,10 +21,9 @@ class msg:
     incz = np.float32
 
 def logdataImu(i):
-	f1 = os.path.join("data/dataFolder"+str(i), "gyroImuData.txt")
-	f2 = os.path.join("data/dataFolder"+str(i), "accImuData.txt")
-	f3 = os.path.join("data/dataFolder"+str(i), "incImuData.txt")
-	
+    f1 = os.path.join("data/dataFolder"+str(i), "gyroImuData.txt")
+    f2 = os.path.join("data/dataFolder"+str(i), "accImuData.txt")
+    f3 = os.path.join("data/dataFolder"+str(i), "incImuData.txt")
     return f1, f2, f3
 	
 def serial_reader():

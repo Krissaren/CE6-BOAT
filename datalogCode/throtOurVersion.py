@@ -5,7 +5,7 @@ import numpy as np
 import os.path
 from datetime import datetime
 
-throtPort = serial.Serial("/dev/ttyACM1", baudrate=115200, timeout=3.0)
+throtPort = serial.Serial("/dev/Throttle", baudrate=115200, timeout=3.0)
 
 class motordata:
 	time = np.uint64
@@ -41,3 +41,5 @@ def talkerThrot(f1):
 	#port.write(bytes(set_point))
 
 
+def setThrotPos(enc):
+	throtPort.write(bytes(enc, 'utf-8'))
