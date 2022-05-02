@@ -6,7 +6,7 @@ import serial
 import os.path
 
 i = 1
-gpsPort = serial.Serial("/dev/ttyUSB0", baudrate=115200, timeout=3.0)
+gpsPort = serial.Serial("/dev/GPS", baudrate=115200, timeout=3.0)
 
 class msg_gpgga:
     time = np.uint64 

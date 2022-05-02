@@ -1,4 +1,5 @@
 RudderEnc: (some are scaled to 212 000 and some 228 000 max) 
+Positive angle is the side in which the max is 32°.
 0 = 32° (whatever) 
 44000 = 16° (212 000 max) 
  
@@ -7,10 +8,116 @@ RudderEnc: (some are scaled to 212 000 and some 228 000 max)
  
 176000 = -32° (212 000 max) 
 189200 = -32° (228 000 max) 
- 
- 
-throt11937rud189212.log: 
- 
- 
-throt11993rud0.log: 
-inertia = 3.0862 
+
+
+throt11993rud0.log: //32° (whatever) ***
+Force = 464.9
+Tau = 295.6314
+X1: 18.3 Y1: -20.4 X2: 19.55 Y2: 10.0533
+Accel = 24.3626
+Inertia = 12.1346
+
+throt12048rud0.log: //32° (whatever) ***
+Force = 464.9
+Tau = 295.6314
+X1: 17.05 Y1: -17.64 X2: 17.85 Y2: 0.86667
+Accel = 23.1333
+Inertia = 12.7795
+
+throt14968rud0.log: //32° (whatever) ***
+Force = 989
+Tau = 628.9082
+X1: 13 Y1: -29.6533 X2: 13.5 Y2: -8.3067
+Accel = 42.6933
+Inertia = 14.7309
+
+throt15049rud0.log: //32° (whatever) ***
+Force = 989
+Tau = 628.9082
+X1: 18.1 Y1: -27.7467 X2: 18.85 Y2: 10.4133
+Accel = 50.88
+Inertia = 12.3606
+
+throt12012rud44011.log: //16° (212 000 max) ****
+Force = 464.9
+Tau = 153.7726
+X1: 23.15 Y1: -15.2 X2: 24.2 Y2: -0.85333
+Accel = 13.6635
+Inertia = 11.2543
+
+throt12106rud44012.log: //16° (212 000 max) **** HMM ALSO GOOD
+Force = 464.9
+Tau = 153.7726
+X1: 47.45 Y1: -16.0267 X2: 48.65 Y2: 0.4
+Accel = 13.6889
+Inertia = 11.2334
+
+throt14975rud44074.log: //16° (212 000 max) ***
+Force = 989
+Tau = 327.1264
+X1: 36 Y1: -13.2267 X2: 36.45 Y2: -4.6667
+Accel = 19.0223
+Inertia = 17.197
+
+throt15006rud44050.log: //16° (212 000 max) ****
+Force = 989
+Tau = 327.1264
+X1: 14.9 Y1: -18.2133 X2: 15.95 Y2: 5.6667
+Accel = 22.7428
+Inertia = 14.3837
+
+throt12026rud132135.log: //-16° (212 000 max) ****
+Force = 464.9
+Tau = 153.7726
+X1: 46.05 Y1: 14.8533 X2: 47 Y2: 0.56
+Accel = 15.0456
+Inertia = 10.2204
+
+throt12047rud132106.log: //-16° (212 000 max) **** 2ND BEST FOR PLOT
+Force = 464.9
+Tau = 153.7726
+X1: 33.4 Y1: 8.4933 X2: 33.9 Y2: 2.7067
+Accel = 11.5733
+Inertia = 13.2868
+
+throt15018rud132117.log: //-16° (212 000 max) ****
+Force = 989
+Tau = 327.1264
+X1: 40.2 Y1: 10.9467 X2: 40.6 Y2: 3.3867
+Accel = 18.9001
+Inertia = 17.3082
+
+throt15069rud132126.log: //-16° (212 000 max) ****
+Force = 989
+Tau = 327.1264
+X1: 45.8 Y1: 14.7867 X2: 46.5 Y2: -0.18667
+Accel = 21.3905
+Inertia = 15.2931
+
+throt12004rud176000.log: //-32° (212 000 max) ***
+Force = 464.9
+Tau = 295.6314
+X1: 13.55 Y1: 30.96 X2: 14.5 Y2: 4.7733
+Accel = 27.5649
+Inertia = 10.7249
+
+throt12020rud176179.log: //-32° (212 000 max) *** 
+Force = 464.9
+Tau = 295.6314
+X1: 16.75 Y1: 24.08 X2: 17.65 Y2: -1.2
+Accel = 28.0889
+Inertia = 10.5249
+
+throt15000rud176000.log: //-32° (212 000 max) ***
+Force = 989
+Tau = 628.9082
+X1: 14.8 Y1: 37.8533 X2: 15.5 Y2: 3.1067
+Accel = 49.638
+Inertia = 12.6699
+
+throt15000rud176001.log: //-32° (212 000 max) ***
+Force = 989
+Tau = 628.9082
+X1: 21.65 Y1: 32.5867 X2: 22.2 Y2: -0.22667
+Accel = 59.6607
+Inertia = 10.5414

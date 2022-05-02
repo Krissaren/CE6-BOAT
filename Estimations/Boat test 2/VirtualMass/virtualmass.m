@@ -19,7 +19,7 @@ Accel = gradient(Speed)./0.050;
 SpeedFiltered = movmean(Speed,10);
 AccelFiltered = gradient(SpeedFiltered)./0.050;
 
-readAccel = (2.94519-2.38188)/(abs(18.1-18.15));
+readAccel = (2.94519-2.38188)/(abs(18.1-18.15))
 
 max(abs(Accel));
 virtualMass = 500/readAccel % 500 N at 12000 encoder value

@@ -5,7 +5,7 @@ import numpy as np
 import os.path
 from datetime import datetime
 
-rudPort = serial.Serial("/dev/ttyACM0", baudrate=115200, timeout=3.0)
+rudPort = serial.Serial("/dev/Rudder", baudrate=115200, timeout=0)
 
 class motordata:
 	time = np.uint64
@@ -16,7 +16,9 @@ def logdataRud(i):
 	return os.path.join("data/dataFolder"+str(i), "rudData.txt")
 	
 def serial_reader():
-	return rudPort.readline()
+	a = rudPort.readline()
+	print(a)
+	return a
 
 def format(data):
 	#print(data)
@@ -39,3 +41,7 @@ def talkerRud(f1):
 	
 	#print("#"+str(set_point))
 	#port.write(bytes(set_point))
+
+
+def setRudPos(enc):
+	print(rudPort.write(bytes(enc, 'utf-8')))
