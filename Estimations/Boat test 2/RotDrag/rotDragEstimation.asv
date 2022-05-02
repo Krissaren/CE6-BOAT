@@ -51,24 +51,38 @@ plot(secs, CourseAngleFinal)
 
 %%
 
-EQs = [11150 132652 23.26; 11174 82295 15.57; 11260 44290 11.5; 14193 126931 29.97; 13344 82276 18.55;
-    13381 44260 13.23; 14736 132652 33.86; 14957 82295 23.88; 14941 44358 12.44]; %Throttle, rudder and beta for their regressions
+EQs = [11260 44290 11.5; 11174 82295 15.57; 11150 132652 23.26; 13381 44260 13.23; 13344 82276 20.55;
+    13431 126931 29.97; 14941 44358 12.44; 14957 82295 23.88; 14736 132652 33.86;]; %Throttle, rudder and beta for their regressions
 
-EQsNy = [11260 44290 11.5; 11174 82295 15.57; 11150 132652 23.26; 13381 44260 13.23; 13344 82276 18.55;
-    14193 126931 29.97; 14736 132652 33.86; 14957 82295 23.88; 14941 44358 12.44];
 
 ThrottleForce = EQs(1:9,1)*0.1747 - 1631.5
 
 RudderAng = sind((EQs(1:9,2)*0.00036320754) - 3.1802);
 
-RigtigVinkel = EQs(1:9,2)*0.00036320754 - 3.1802
+RigtigVinkel = EQs(1:9,2)*0.00036320754 - 3.1802;
 
 tau = (RudderAng.* ThrottleForce) * 1.2 
 
 Drag = 2*tau./(EQs(1:9,3))
 
+
+
 figure(1)
-plot(Drag, '-o')
+plot(EQs(1:3, 3), Drag(1:3,1), 'o')
+legend('drag coefficient')
+xlabel([char(176),'/s']) 
+ylabel('C_{d}_{r}') 
+
+figure(2)
+plot(EQs(4:6, 3), Drag(4:6,1), 'o')
+legend('drag coefficient')
+xlabel([char(176),'/s']) 
+ylabel('C_{d}_{r}') 
+figure(3)
+plot(EQs(7:9, 3), Drag(7:9,1), 'o')
+legend('drag coefficient')
+xlabel([char(176),'/s']) 
+ylabel('C_{d}_{r}') 
 
 
 
