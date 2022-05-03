@@ -1,0 +1,2 @@
+$GPVTG,,T,,M,,N,,K,N*2C\r\n
+$GPVTG,,T,,M,,N,,K,N*2C\r\n
