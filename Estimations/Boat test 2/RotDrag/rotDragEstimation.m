@@ -63,7 +63,7 @@ RigtigVinkel = EQs(1:9,2)*0.00036320754 - 3.1802;
 
 tau = (RudderAng.* ThrottleForce) * 1.2 
 
-Drag = 2*tau./(EQs(1:9,3))
+Drag = 2*tau./(EQs(1:9,3))26
 
 
 
