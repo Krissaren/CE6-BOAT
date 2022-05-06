@@ -131,14 +131,14 @@ def obtainValues(data,ref):
     
     msgNMEA = gpgga(data)
     msgDec = NMEAtoDec(msgNMEA.lat,msgNMEA.lat_dir,msgNMEA.lon,msgNMEA.lon_dir)
-    
+      
     distance = refDistance(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #2698.09m from nmeagenerator
     bearing = refBearing(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #98.06° from nmeagenerator
     
-    print('Reference point in decimal coordinates: ', refmsgDec.lat, refmsgDec.lon)
-    print('Current point in decimal coordinates: ', msgDec.lat, ' ', msgDec.lon)
-    print('Distance in meters: ', distance)
-    print('Bearing relative to north in degrees: ', bearing)
+    #print('Reference point in decimal coordinates: ', refmsgDec.lat, refmsgDec.lon)
+    #print('Current point in decimal coordinates: ', msgDec.lat, ' ', msgDec.lon)
+    #print('Distance in meters: ', distance)
+    #print('Bearing relative to north in degrees: ', bearing)
     
     return distance, bearing
 

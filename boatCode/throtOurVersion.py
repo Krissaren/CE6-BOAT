@@ -36,10 +36,6 @@ def talkerThrot(f1):
 	now = datetime.now()
 	
 	f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data.decode('UTF-8'))
-    	
-	#print("#"+str(set_point))
-	#port.write(bytes(set_point))
-
 
 def setThrotPos(enc):
 	throtPort.write(bytes(enc, 'utf-8'))
