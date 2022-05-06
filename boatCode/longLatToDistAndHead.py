@@ -2,8 +2,6 @@ import math
 import string
 import time as t
 import numpy as np
-import serial
-import os.path
 
 class msg_gpgga:
     time = np.uint64 
