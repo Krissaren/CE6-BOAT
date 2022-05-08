@@ -1,23 +1,38 @@
 Kp_i = 18000
 Kd = 10000
 
-bearList = []
+delay = 0.05
 
-def bearController(bear):        
+inBearList = []
+bearList = []
+refbearList = []
+
+upperRudLim = 60000
+lowerRudLim = -60000
+
+def bearController(bear, refbear):        
+    inBearList.append(bear)
+    refbearList.append(refbear)
+    
     if len(bearList) < 3:
         nextBear = 0
         
     else:
-        print("bearprint")
-        bearLen = len(bearList) - 1
-        error = bearList - 
-        delay = 0.05
-        #nextBear = Kd / delay * (bearList[bearLen] - 2 * bearList[bearLen - 1] + bearList[bearLen - 2]) + Kp_i * (bearList[bearLen] - bearList[bearLen - 1]) + bear
-        nextBear = Kp_i * (bearList[bearLen] - bearList[bearLen - 1]) + bear
+        inBearLen = len(inBearList) - 1
+        refbearLen = len(refbearList) - 1
+        
+        error = refbearList[refbearLen] - inBearList[inBearLen]
+        preerror = refbearList[refbearLen - 1] - inBearList[inBearLen - 1]
+        pre2error = refbearList[refbearLen - 2] - inBearList[inBearLen - 2]
+        
+        nextBear = Kd / delay * (error - 2 * preerror + pre2error) + Kp_i * (error - preerror) + bearList[-1]
     
-    if(nextBear > 60000):
-        nextBear = 60000
-    if(nextBear < -60000):
-        nextBear = -60000
+    if(nextBear > upperRudLim):
+        nextBear = upperRudLim
+        
+    if(nextBear < lowerRudLim):
+        nextBear = lowerRudLim
+        
     bearList.append(nextBear)
+    
     return nextBear

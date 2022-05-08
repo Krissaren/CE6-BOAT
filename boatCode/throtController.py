@@ -36,22 +36,15 @@ def velController(vel):
         nextVel = 0
         
     else:
-        """
         distLen = len(distList) - 1
         velLen = len(velList) - 1
-        #print("distLen", distLen)
-        #print("vellen", velLen)
+        
         error = distList[distLen] - inVelList[velLen]
         preerror = (distList[distLen - 1] - inVelList[velLen - 1])
         pre2error = (distList[distLen - 2] - inVelList[velLen - 2])
         
         nextVel = Kd / delay * (error - 2 * preerror + pre2error) + Kp_i * (error - error) + delay * Ki * error + velList[-1]
-        """
-        error = distList - inVelList
-        errorLen = len(error)
-        
-        nextVel = Kd / delay * (error[errorLen] - 2 * error[errorLen - 1] + error[errorLen - 2]) + Kp_i * (error[errorLen] - error[errorLen - 1]) + delay * Ki * error[errorLen] + velList[-1]
-    
+
     if nextVel > upperThrotLim:
         nextVel = upperThrotLim
         

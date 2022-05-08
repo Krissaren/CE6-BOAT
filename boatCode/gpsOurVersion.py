@@ -8,7 +8,9 @@ from obtainVel import *
 #Define global variables
 dist = None
 bear = None
+refBear = None
 vel = None
+
 
 #Definir puerto
 gpsPort = serial.Serial("/dev/GPS", baudrate=115200, timeout=3.0)   
@@ -31,6 +33,7 @@ def next(string, number):
         index2 = string.find(",",index2)
 
     return string[index1:index2]
+
 class msg_gpvtg:
     time = np.uint64 
 
@@ -38,11 +41,22 @@ class msg_gpvtg:
     utc_seconds = np.float64
 
     vel = np.float32
+    bear = np.float32
     
 def gpvtg(data):
     string = str(data)
     msg = msg_gpvtg
     msg.time = int(round(time.time() * 1000))
+    
+    index1 = 0
+    index2 = string.find(",")
+    index1 = index2
+    index2 = string.find(",", index2 + 1)
+    
+    if string[index1 + 1:index2] == "":
+        msg.bear = float(0)
+    else:
+        msg.bear = float(string[index1 + 1:index2])
     
     index1 = 0
     index2 = string.find("N")
@@ -55,12 +69,13 @@ def gpvtg(data):
         msg.vel = float(0)
     else:
         msg.vel = float(string[index1 + 1:index2])
+        
     msg.utc_seconds = float(0)
 
     return msg
 
 def talkerGps(f1, f2, pointList, pointNum):
-    global dist, bear, vel
+    global dist, bear, refBear, vel
     
     ref = pointList[pointNum]
     
@@ -75,6 +90,6 @@ def talkerGps(f1, f2, pointList, pointNum):
             f2.write(str(serial_data).strip("b'")+"\n")
             vel = obtainVel(str(serial_data).strip("b'"))/3.6
             msg = gpvtg(serial_data)
-            bear = msg.
+            bear = msg.bear
         
-    return dist, bear, vel
+    return dist, bear, refbear, vel

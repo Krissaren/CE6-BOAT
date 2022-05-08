@@ -28,18 +28,21 @@ if __name__ == '__main__':
         while(1):            
             
             if(gpsPort.in_waiting > 44):
-                dist, bear, vel = talkerGps(fGps1, fGps2, pointList, refPoint)
+                dist, bear, refbear, gpsvel = talkerGps(fGps1, fGps2, pointList, refPoint)
+                
                 if(dist != None):
                     distRef = distController(dist)
-                if(vel == None):
+                
+                if(gpsvel == None):
                     vel = 0
-                velRef = velController(vel)
+                    
                 print("Distance:",dist,", Bearing:",bear,", Velocity:",vel,", Point:",refPoint)
+                
+                velRef = velController(gpsvel)
                 print("Encoder value throttle: ", velRef)
-                #print("hallo000000000000000000000", currentTime-start)
-                #start = currentTime
                 setThrotPos(velRef)
-                bearRef = bearController(bear, )
+                
+                bearRef = bearController(bear, refbear)
                 print("Encoder value rudder: ", bearRef)
                 setRudPos(bearRef)
             
@@ -47,18 +50,19 @@ if __name__ == '__main__':
             dist, bear, vel = oldtalkerGps(file, pointList, count)
             count += 2
             """
-            #print("Distance:",dist,", Bearing:",bear,", Velocity:",vel,", Point:",refPoint)
+            
             if(dist != None):
                 if dist < 5 and refPoint <  len(pointList):    #Check in which point we want to go
                     refPoint += 1 
             
             if(imuPort.in_waiting > 39):
-                talkerImu(fImu1, fImu2, fImu3)
+                imuVel = talkerImu(fImu1, fImu2, fImu3)
+                
             if(rudPort.in_waiting > 5):
                 talkerRud(fRud1)
+            
             if(throtPort.in_waiting > 5):
                 talkerThrot(fThrot1)
-            #print(distRef)
             
             
             """
