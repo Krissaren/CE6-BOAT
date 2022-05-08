@@ -28,7 +28,7 @@ Encoder myEnc(2, 3);
 unsigned long previousMillis = 0;
 int squareCount = 0;
 
-const long looptime = 50;  // looptime in ms.
+const long looptime = 40;  // looptime in ms.
 long setpoint = 0;
 float pgain = 0.05;
 float calcedPWM = 0;
@@ -71,9 +71,9 @@ void loop() {
   //  }
 
 
-  Serial.print(pos);
-  Serial.print(" ");
-  Serial.println(millis());
+ // Serial.print(pos);
+  //Serial.print(" ");
+  //Serial.println(millis());
 
   /*// sqaure wave
     if(squareCount > 2000)
@@ -86,12 +86,13 @@ void loop() {
       setpoint = 10000;
   */
 
-  if (Serial.available() > 0) {
+  if (Serial.available() > 4) {
     //Serial.print(" read ");
     // read the incoming byte:
     setpoint = Serial.parseInt();
-    //setpoint = Serial.read();;
-    Serial.println(setpoint);
+    //setpoint = Serial.read();
+    
+    //Serial.println(setpoint);
     //Serial.read();
   }
   //Serial.print(",");
