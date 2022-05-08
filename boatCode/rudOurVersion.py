@@ -17,7 +17,7 @@ def logdataRud(i):
 	
 def serial_reader():
 	a = rudPort.readline()
-	print(a)
+	#print(a)
 	return a
 
 def format(data):
@@ -40,4 +40,5 @@ def talkerRud(f1):
 	f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data.decode('UTF-8'))
     
 def setRudPos(enc):
-	print(rudPort.write(bytes(enc, 'utf-8')))
+	enc = str(int(enc))
+	rudPort.write(bytes(enc, 'utf-8'))

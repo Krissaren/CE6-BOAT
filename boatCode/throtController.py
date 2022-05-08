@@ -1,9 +1,10 @@
 
 #Constants declaration
-Kp_o = 0.1041
+Kp_o = 0.059
 
-Kp_i = 595.66
-Ki = 659.9
+Kp_i = 1746.5
+Ki = 437.8
+Kd = 1216.2
 
 inVelList = []
 distList = []
@@ -11,7 +12,7 @@ velList = []
 
 delay = 0.05
 
-opVelLim = 2.46
+opVelLim = 2.0
 upperThrotLim = 5227
 lowerThrotLim = 0
 
@@ -29,23 +30,20 @@ def velController(vel):
                         #Like this if velController its called after distController, 
                         #if not add dist as a input variable of the function
     inVelList.append(vel)
-    
-    if distList == False:
-        nextVel = 0
-        
-    elif len(distList) == 1:
-        print(distList)
+    if len(distList) < 3:
         nextVel = 0
         
     else:
         distLen = len(distList) - 1
         velLen = len(velList) - 1
-        
+        #print("distLen", distLen)
+        #print("vellen", velLen)
         error = distList[distLen] - inVelList[velLen]
-        preerror = (distList[distLen - 1] - inVelList[velLen - 1])
+        preError = distList[distLen-1] - inVelList[velLen-1]
+        prePreError = distList[distLen-2] - inVelList[velLen-2]
+     
         
-        nextVel = Kp_i * (error - preerror) + delay * Ki * error + velList[velLen]
-        
+        nextVel = Kd / delay * (error - 2 * preError + prePreError) + Kp_i * (error - preError) + delay * Ki * error + velList[-1]       
     
     if nextVel > upperThrotLim:
         nextVel = upperThrotLim

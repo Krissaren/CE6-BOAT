@@ -29,6 +29,7 @@ def format(data):
 		msg.encoder = set_point
 	
 	msg.set_point = set_point
+
 	return msg
 
 def talkerThrot(f1):
@@ -38,4 +39,6 @@ def talkerThrot(f1):
 	f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + serial_data.decode('UTF-8'))
 
 def setThrotPos(enc):
-	throtPort.write(bytes(enc, 'utf-8'))
+	enc= str(int(enc))
+	throtPort.write(bytes(enc + "A", 'utf-8'))
+	print("buffer", throtPort.out_waiting)

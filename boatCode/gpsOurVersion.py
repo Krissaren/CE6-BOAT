@@ -31,6 +31,33 @@ def next(string, number):
         index2 = string.find(",",index2)
 
     return string[index1:index2]
+class msg_gpvtg:
+    time = np.uint64 
+
+    # UTC seconds from midnight
+    utc_seconds = np.float64
+
+    vel = np.float32
+    
+def gpvtg(data):
+    string = str(data)
+    msg = msg_gpvtg
+    msg.time = int(round(time.time() * 1000))
+    
+    index1 = 0
+    index2 = string.find("N")
+    index1 = index2
+    index2 = string.find(",", index2 + 1)
+    index1 = index2
+    index2 = string.find(",", index2 + 1)
+    
+    if string[index1 + 1:index2] == "":
+        msg.vel = float(0)
+    else:
+        msg.vel = float(string[index1 + 1:index2])
+    msg.utc_seconds = float(0)
+
+    return msg
 
 def talkerGps(f1, f2, pointList, pointNum):
     global dist, bear, vel
@@ -42,10 +69,12 @@ def talkerGps(f1, f2, pointList, pointNum):
         
         if serial_data[0:6].decode('UTF-8') == "$GPGGA":
             f1.write(str(serial_data).strip("b'")+"\n")
-            dist, bear = obtainValues(str(serial_data).strip("b'"), ref)
+            dist, refbear = obtainValues(str(serial_data).strip("b'"), ref)
             
         elif serial_data[0:6].decode('UTF-8') == "$GPVTG":
             f2.write(str(serial_data).strip("b'")+"\n")
             vel = obtainVel(str(serial_data).strip("b'"))/3.6
+            msg = gpvtg(serial_data)
+            bear = msg.
         
     return dist, bear, vel
