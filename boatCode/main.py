@@ -1,3 +1,5 @@
+import time as t
+
 from setup import *
 from mainLog import *
 from readOldData import *
@@ -9,6 +11,9 @@ if __name__ == '__main__':
     refPoint = 1 #postion in the array of reference points
     
     pointList = createPointList()
+    setupRud()
+    
+    t.sleep(15) #delay to set the Rudder in the center (15 from the left and 11.4 from the right)
     
     fGps1, fGps2, fImu1, fImu2, fImu3, fRud1, fThrot1 = mainLog()
     """

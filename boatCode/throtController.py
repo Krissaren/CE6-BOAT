@@ -12,7 +12,8 @@ velList = []
 
 delay = 0.05
 
-opVelLim = 2.0
+opVelLim = 2.46
+
 upperThrotLim = 5227
 lowerThrotLim = 0
 
@@ -30,26 +31,33 @@ def velController(vel):
                         #Like this if velController its called after distController, 
                         #if not add dist as a input variable of the function
     inVelList.append(vel)
+          
     if len(distList) < 3:
         nextVel = 0
         
     else:
+        """
         distLen = len(distList) - 1
         velLen = len(velList) - 1
         #print("distLen", distLen)
         #print("vellen", velLen)
         error = distList[distLen] - inVelList[velLen]
-        preError = distList[distLen-1] - inVelList[velLen-1]
-        prePreError = distList[distLen-2] - inVelList[velLen-2]
-     
+        preerror = (distList[distLen - 1] - inVelList[velLen - 1])
+        pre2error = (distList[distLen - 2] - inVelList[velLen - 2])
         
-        nextVel = Kd / delay * (error - 2 * preError + prePreError) + Kp_i * (error - preError) + delay * Ki * error + velList[-1]       
+        nextVel = Kd / delay * (error - 2 * preerror + pre2error) + Kp_i * (error - error) + delay * Ki * error + velList[-1]
+        """
+        error = distList - inVelList
+        errorLen = len(error)
+        
+        nextVel = Kd / delay * (error[errorLen] - 2 * error[errorLen - 1] + error[errorLen - 2]) + Kp_i * (error[errorLen] - error[errorLen - 1]) + delay * Ki * error[errorLen] + velList[-1]
     
     if nextVel > upperThrotLim:
         nextVel = upperThrotLim
+        
     elif nextVel < lowerThrotLim:
         nextVel = lowerThrotLim
     
     velList.append(nextVel)
     
-    return nextVel + 10000 #addind the offset
+    return nextVel + 10000 #adding the offset

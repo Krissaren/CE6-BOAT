@@ -115,3 +115,7 @@ def talkerImu(f1, f2, f3):
     f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data1).strip("[]")+"\n")
     f2.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data2).strip("[]")+"\n")
     f3.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data3).strip("[]")+"\n")
+    
+    vel = (np.sqrt(pow(serial_data2[0],2) + pow(serial_data2[1],2) + pow(serial_data2[2],2)) - 1) * 9.80665 / 0.008
+    
+    return vel
