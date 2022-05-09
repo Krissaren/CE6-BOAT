@@ -8,7 +8,7 @@ from obtainVel import *
 #Define global variables
 dist = None
 bear = None
-refBear = None
+refbear = None
 vel = None
 
 
@@ -33,8 +33,7 @@ def next(string, number):
         index2 = string.find(",",index2)
 
     return string[index1:index2]
-
-class msg_gpvtg:
+class msg_gpvtg1:
     time = np.uint64 
 
     # UTC seconds from midnight
@@ -43,21 +42,19 @@ class msg_gpvtg:
     vel = np.float32
     bear = np.float32
     
-def gpvtg(data):
+def gpvtg1(data):
     string = str(data)
-    msg = msg_gpvtg
-    msg.time = int(round(time.time() * 1000))
-    
+    msg = msg_gpvtg1
+    msg.time = int(round(t.time() * 1000))
+
     index1 = 0
     index2 = string.find(",")
     index1 = index2
     index2 = string.find(",", index2 + 1)
-    
-    if string[index1 + 1:index2] == "":
-        msg.bear = float(0)
+    if string[index1 + 1 : index2] == "":
+        msg.bear = float(string[index1 +1: index2])
     else:
-        msg.bear = float(string[index1 + 1:index2])
-    
+        msg.bear = float(string[index1 +1: index2])
     index1 = 0
     index2 = string.find("N")
     index1 = index2
@@ -75,7 +72,7 @@ def gpvtg(data):
     return msg
 
 def talkerGps(f1, f2, pointList, pointNum):
-    global dist, bear, refBear, vel
+    global dist, bear, refbear, vel
     
     ref = pointList[pointNum]
     
@@ -89,7 +86,7 @@ def talkerGps(f1, f2, pointList, pointNum):
         elif serial_data[0:6].decode('UTF-8') == "$GPVTG":
             f2.write(str(serial_data).strip("b'")+"\n")
             vel = obtainVel(str(serial_data).strip("b'"))/3.6
-            msg = gpvtg(serial_data)
+            msg = gpvtg1(serial_data)
             bear = msg.bear
         
     return dist, bear, refbear, vel

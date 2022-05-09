@@ -44,7 +44,7 @@ def refDistance(lat1, lon1, lat2, lon2): #haversine
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
     return R * c
 
-def refBearing(lat1, lon1, lat2, lon2):
+def refBearing(lat2, lon2, lat1, lon1):
     rLat1 = math.radians(lat1)
     rLat2 = math.radians(lat2)
     rLon1 = math.radians(lon1)

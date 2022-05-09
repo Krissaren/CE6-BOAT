@@ -38,18 +38,18 @@ if __name__ == '__main__':
     fImu3 = open(fImu3, "a")
     fRud1 = open(fRud1, "a")
     fThrot1 = open(fThrot1, "a")
-    setRudPos("40000")
+    #setRudPos("40000")
     #setThrotPos("10000")
-    time.sleep(2)
-    setRudPos("0")
+    #time.sleep(2)
+    #setRudPos("0")
     #setThrotPos("0")
     try:
         while(1):
             now = datetime.now()
             talkerGps(fGps1, fGps2)
             talkerImu(fImu1, fImu2, fImu3)
-            talkerRud(fRud1)
-            talkerThrot(fThrot1)
+            #talkerRud(fRud1)
+            #talkerThrot(fThrot1)
             
             
             
