@@ -28,8 +28,7 @@ if __name__ == '__main__':
         while(1):            
             
             if(gpsPort.in_waiting > 44):
-                dist, bear, refbear, gpsvel = talkerGps(fGps1, fGps2, pointList, refPoint)
-                
+                dist, bear, refbear, vel = talkerGps(fGps1, fGps2, pointList, refPoint)
                 if(dist != None):
                     distRef = distController(dist)
                 
@@ -41,8 +40,7 @@ if __name__ == '__main__':
                 velRef = velController(gpsvel)
                 print("Encoder value throttle: ", velRef)
                 setThrotPos(velRef)
-                
-                bearRef = bearController(bear, refbear)
+                bearRef = bearController(bear, refbear )
                 print("Encoder value rudder: ", bearRef)
                 setRudPos(bearRef)
             
