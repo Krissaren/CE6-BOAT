@@ -2,8 +2,6 @@ import math
 import string
 import time as t
 import numpy as np
-import serial
-import os.path
 
 class msg_gpgga:
     time = np.uint64 
@@ -46,7 +44,7 @@ def refDistance(lat1, lon1, lat2, lon2): #haversine
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
     return R * c
 
-def refBearing(lat1, lon1, lat2, lon2):
+def refBearing(lat2, lon2, lat1, lon1):
     rLat1 = math.radians(lat1)
     rLat2 = math.radians(lat2)
     rLon1 = math.radians(lon1)
@@ -131,14 +129,14 @@ def obtainValues(data,ref):
     
     msgNMEA = gpgga(data)
     msgDec = NMEAtoDec(msgNMEA.lat,msgNMEA.lat_dir,msgNMEA.lon,msgNMEA.lon_dir)
-    
+      
     distance = refDistance(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #2698.09m from nmeagenerator
     bearing = refBearing(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #98.06° from nmeagenerator
     
-    print('Reference point in decimal coordinates: ', refmsgDec.lat, refmsgDec.lon)
-    print('Current point in decimal coordinates: ', msgDec.lat, ' ', msgDec.lon)
-    print('Distance in meters: ', distance)
-    print('Bearing relative to north in degrees: ', bearing)
+    #print('Reference point in decimal coordinates: ', refmsgDec.lat, refmsgDec.lon)
+    #print('Current point in decimal coordinates: ', msgDec.lat, ' ', msgDec.lon)
+    #print('Distance in meters: ', distance)
+    #print('Bearing relative to north in degrees: ', bearing)
     
     return distance, bearing
 

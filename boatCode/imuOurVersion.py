@@ -5,7 +5,6 @@ import serial
 import os.path
 from datetime import datetime
 
-i = 0
 imuPort = serial.Serial("/dev/IMU", baudrate=921600, timeout=3.0)
 
 class msg:
@@ -20,10 +19,10 @@ class msg:
     incy = np.float32
     incz = np.float32
 
-def logdataImu(i):
-    f1 = os.path.join("data/dataFolder"+str(i), "gyroImuData.txt")
-    f2 = os.path.join("data/dataFolder"+str(i), "accImuData.txt")
-    f3 = os.path.join("data/dataFolder"+str(i), "incImuData.txt")
+def logdataImu(num):
+    f1 = os.path.join("data/dataFolder"+str(num), "gyroImuData.txt")
+    f2 = os.path.join("data/dataFolder"+str(num), "accImuData.txt")
+    f3 = os.path.join("data/dataFolder"+str(num), "incImuData.txt")
     return f1, f2, f3
 	
 def serial_reader():
@@ -106,10 +105,9 @@ def talkerImu(f1, f2, f3):
     msgnew = msg
     msgold = msg
     
-    serial_data = serial_reader()
     serial_data1, serial_data2, serial_data3 = serial_reader2()
     
-    msgold = msgnew
+    msgold = msgnew #for later with the speed
     msgnew = format(serial_data1, serial_data2, serial_data3)
     
     now = datetime.now()
@@ -117,3 +115,7 @@ def talkerImu(f1, f2, f3):
     f1.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data1).strip("[]")+"\n")
     f2.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data2).strip("[]")+"\n")
     f3.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data3).strip("[]")+"\n")
+    
+    vel = (np.sqrt(pow(serial_data2[0],2) + pow(serial_data2[1],2) + pow(serial_data2[2],2)) - 1) * 9.80665 / 0.008
+    
+    return vel
