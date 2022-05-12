@@ -51,9 +51,9 @@ if __name__ == '__main__':
                 print("Encoder value rudder: ", bearRef)
                 setRudPos(bearRef)
                 
-                print("Distance: ",dist," Bearing: ",bear," Velocity: ",vel," Point: ",refPoint, " Encoder value throttle: ", velRef, " Encoder value rudder: ", bearRef, " Bearing error: ", error)
+                print("Distance: ",dist," Bearing: ",bear, " Ref bear", refbear, " Velocity: ",vel," Point: ",refPoint, " Encoder value throttle: ", velRef, " Encoder value rudder: ", bearRef, " Bearing error: ", error)
                 
-                fextra.write("Distance: ",dist," Bearing: ",bear," Velocity: ",vel," Point: ",refPoint, " Encoder value throttle: ", velRef, " Encoder value rudder: ", bearRef, " Bearing error: ", error +"\n")
+                fextra.write("Distance: " + str(dist) + " Bearing: " + str(bear) + " Ref bearing: " + str(refbear) + " Velocity: " + str(vel) + " Point: " + str(refPoint) + " Encoder value throttle: " +  str(velRef) + " Encoder value rudder: " +  str(bearRef) + " Bearing error: " + str(error) + "\n")
             
                 if(dist != None):
                     if dist < 5 and refPoint <  len(pointList) and final == 0:    #Check in which point we want to go
@@ -69,8 +69,8 @@ if __name__ == '__main__':
             """
                
             if(imuPort.in_waiting > 39):
-                imuVel = talkerImu(fImu1, fImu2, fImu3)
-                totvel += imuVel
+                talkerImu(fImu1, fImu2, fImu3)
+                #totvel += imuVel
                 #print("Velocity of the IMU: ", totvel)
             
             """

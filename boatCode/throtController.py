@@ -13,7 +13,7 @@ velList = []
 delay = 0.05
 
 opVelLim = 2.46
-upperThrotLim = 6000
+upperThrotLim = 5227
 lowerThrotLim = 0
 
 def distController(dist): 
@@ -31,7 +31,7 @@ def velController(vel):
                         #if not add dist as a input variable of the function
     inVelList.append(vel)
           
-    if len(distList) < 3:
+    if len(distList) < 5:
         nextVel = 0
         
     else:
@@ -52,4 +52,4 @@ def velController(vel):
     
     velList.append(nextVel)
     
-    return nextVel + 9000 #addind the offset
+    return nextVel + 10000 #addind the offset
