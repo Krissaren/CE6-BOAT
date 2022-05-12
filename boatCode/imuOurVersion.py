@@ -116,6 +116,10 @@ def talkerImu(f1, f2, f3):
     f2.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data2).strip("[]")+"\n")
     f3.write(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond) + " " + str(serial_data3).strip("[]")+"\n")
     
+<<<<<<< Updated upstream
     vel = (serial_data2[0] + serial_data2[1] + serial_data2[2] - X) * 9.80665 * 0.008
+=======
+    vel = (serial_data2[0] + serial_data2[1] + serial_data2[2] - 0.9887146370199428) * 9.80665 / 0.008
+>>>>>>> Stashed changes
     
     return vel
