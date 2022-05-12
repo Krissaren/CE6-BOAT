@@ -31,6 +31,7 @@ def mainLog():
     fImu1, fImu2, fImu3 = logdataImu(i)
     fRud1 = logdataRud(i)
     fThrot1 = logdataThrot(i)
+    fextra = os.path.join("data/dataFolder"+str(i), "extraData.txt")
 
     fGps1 = open(fGps1, "a")
     fGps2 = open(fGps2, "a")
@@ -39,5 +40,6 @@ def mainLog():
     fImu3 = open(fImu3, "a")
     fRud1 = open(fRud1, "a")
     fThrot1 = open(fThrot1, "a")
+    fextra = open(fextra, "a")
     
-    return fGps1, fGps2, fImu1, fImu2, fImu3, fRud1, fThrot1
+    return fGps1, fGps2, fImu1, fImu2, fImu3, fRud1, fThrot1, fextra
