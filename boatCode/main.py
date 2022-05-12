@@ -41,7 +41,7 @@ if __name__ == '__main__':
                     distRef = distController(dist)
                 
                 if(gpsvel == None):
-                    vel = 0
+                    gpsvel = 0
                 
                 velRef = velController(gpsvel)
                 print("Encoder value throttle: ", velRef)
