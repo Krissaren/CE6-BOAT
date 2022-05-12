@@ -1,0 +1,11 @@
+test we are going to do:
+
+do three tests with same values
+
+different distance when changing point:
+2.5 m, 5 m and 10 m
+
+evaluate data and then tweak controllers
+
+different distance for different controllers:
+2.5 m, 5 m and 10 m
