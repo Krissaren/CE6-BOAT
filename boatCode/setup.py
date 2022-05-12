@@ -18,9 +18,10 @@ def createPointList():
     #Code for the path planning and returns a list with all the points (lon,lat)
     global pointList
 
-    point3 = coord(57.055438791781214, 9.867822674807849)
-    point2 = coord(57.055996437031865, 9.869538499425762)
-    point1= coord(57.05677027976723, 9.871672925400086)
+    point1 = coord(57.01405450775168, 9.987992118860989)
+    point2 = coord(57.014048169900235, 9.98860546200752)
+    point3 = coord(57.01381476124234, 9.98861066434579)
+    point4 = coord(57.013816424744924, 9.987992305095972)
     
     
     

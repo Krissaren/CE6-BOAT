@@ -42,7 +42,7 @@ def velController(vel):
         preerror = (distList[distLen - 1] - inVelList[velLen - 1])
         pre2error = (distList[distLen - 2] - inVelList[velLen - 2])
         
-        nextVel = Kd / delay * (error - 2 * preerror + pre2error) + Kp_i * (error - error) + delay * Ki * error + velList[-1]
+        nextVel = (Kd / delay) * (error - 2 * preerror + pre2error) + Kp_i * (error - preerror) + delay * Ki * error + velList[-1]
 
     if nextVel > upperThrotLim:
         nextVel = upperThrotLim
