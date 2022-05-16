@@ -1,21 +1,23 @@
-Kp = 7200
-Kd = 0
-delay = 0.05
+#Constants declaration
+Kp = 5200
+Ki = 200
+Kd = 5000
 
 inBearList = []
 bearList = []
 refbearList = []
 
+delay = 0.05
+
 upperRudLim = 60000
 lowerRudLim = -60000
 
 
-def bearController(bear, refbear): 
-    error=0
+def bearController(bear, refbear):   
     inBearList.append(bear)
     refbearList.append(refbear)
 
-    if len(bearList) < 3:
+    if len(bearList) < 5:
         nextBear = 0
         
     else:
@@ -25,7 +27,8 @@ def bearController(bear, refbear):
         
         error = refbearList[refbearLen] - inBearList[inBearLen]
         preerror = refbearList[refbearLen - 1] - inBearList[inBearLen - 1]
-        
+        pre2error = refbearList[refbearLen - 2] - inBearList[inBearLen - 2]
+
         if error > 180:
             error = -360 + error
             
@@ -38,10 +41,16 @@ def bearController(bear, refbear):
         elif preerror < -180:
             preerror = 360 + preerror
             
+        if pre2error > 180:
+            pre2error = -360 + pre2error
+            
+        elif preerror < -180:
+            pre2error = 360 + pre2error
+            
         #print("bear error:", error)
         
-        nextBear = Kp * error + (Kd / delay) * (error - preerror) 
-        #nextBear = Kp_i * (error)
+        nextBear = Kp * (error - preerror) +  Ki * delay * error + (Kd / delay) * (error - 2 * preerror + pre2error) + inBearList[-1]
+        #nextBear = Kp * (error)
     
     if(nextBear > upperRudLim):
         nextBear = upperRudLim

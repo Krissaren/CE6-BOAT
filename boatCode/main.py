@@ -44,11 +44,11 @@ if __name__ == '__main__':
                     gpsvel = 0
                 
                 velRef = velController(gpsvel)
-                print("Encoder value throttle: ", velRef)
+                #print("Encoder value throttle: ", velRef)
                 setThrotPos(velRef)
                 
                 bearRef, error = bearController(bear, refbear)
-                print("Encoder value rudder: ", bearRef)
+                #print("Encoder value rudder: ", bearRef)
                 setRudPos(bearRef)
                 
                 print("Distance: ",dist," Bearing: ",bear, " Ref bear", refbear, " Velocity: ",gpsvel," Point: ",refPoint, " Encoder value throttle: ", velRef, " Encoder value rudder: ", bearRef, " Bearing error: ", error)
