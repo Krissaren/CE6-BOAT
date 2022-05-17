@@ -1,4 +1,3 @@
-
 #Constants declaration
 Kp_o = 0.059
 
@@ -13,7 +12,7 @@ velList = []
 delay = 0.05
 
 opVelLim = 2.46
-upperThrotLim = 6000
+upperThrotLim = 2000
 lowerThrotLim = 0
 
 def distController(dist): 
@@ -31,7 +30,7 @@ def velController(vel):
                         #if not add dist as a input variable of the function
     inVelList.append(vel)
           
-    if len(distList) < 3:
+    if len(distList) < 5:
         nextVel = 0
         
     else:
@@ -42,7 +41,7 @@ def velController(vel):
         preerror = (distList[distLen - 1] - inVelList[velLen - 1])
         pre2error = (distList[distLen - 2] - inVelList[velLen - 2])
         
-        nextVel = (Kd / delay) * (error - 2 * preerror + pre2error) + Kp_i * (error - preerror) + delay * Ki * error + velList[-1]
+        nextVel = Kp_i * (error - preerror) +  Ki * delay * error + (Kd / delay) * (error - 2 * preerror + pre2error) + velList[-1]
 
     if nextVel > upperThrotLim:
         nextVel = upperThrotLim
@@ -52,4 +51,4 @@ def velController(vel):
     
     velList.append(nextVel)
     
-    return nextVel + 9000 #addind the offset
+    return nextVel + 10000 #addind the offset
