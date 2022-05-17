@@ -35,31 +35,30 @@ def bearController(bear, refbear):
         pre7error = refbearList[refbearLen - 7] - inBearList[inBearLen - 7]
         pre8error = refbearList[refbearLen - 8] - inBearList[inBearLen - 8]
         pre9error = refbearList[refbearLen - 9] - inBearList[inBearLen - 9]
-        meanError = (error + preerror + pre2error + pre3error + pre4error + pre5error + pre6error +pre7error)/8
-        meanPreerror = (preerror + pre2error + pre3error +pre4error +pre5error + pre6error + pre7error + pre8error)/8
-        meanPre2error = (pre2error + pre3error + pre4error +pre5error + pre6error + pre7error + pre8error + pre9error)/8
-        if meanError > 180:
-            meanError = -360 + meanError
+        meanError[2] = meanError[1]
+        meanError[1] = meanError[0]
+        meanError[0] = (error + preerror + pre2error + pre3error + pre4error + pre5error + pre6error +pre7error)/8
+        #meanPreerror = (preerror + pre2error + pre3error +pre4error +pre5error + pre6error + pre7error + pre8error)/8
+        #meanPre2error = (pre2error + pre3error + pre4error +pre5error + pre6error + pre7error + pre8error + pre9error)/8
+
+        if meanError[0] > 180: #make it between -180 and 180 degrees
+            meanError[0] = -360 + meanError
             
-        elif meanError < -180:
-            meanError = 360 + meanError
+        elif meanError[0] < -180:
+            meanError[0] = 360 + meanError
+
+        if meanError[0] < 0: #finds direction
+            direction = 1
+            meanError[0] = abs(-360 + meanError)
+
+        elif meanError[0] >= 0:
+            direction = (-1)
+            meanError[0] = abs(360 + meanError)
             
-        if meanPreerror > 180:
-            meanPreerror = -360 + meanPreerror
-            
-        elif meanPreerror < -180:
-            meanPreerror = 360 + meanPreerror
-            
-        if meanPre2error > 180:
-            meanPre2error = -360 + meanPre2error
-            
-        elif meanPreerror < -180:
-            meanPre2error = 360 + meanPre2error
-            
-        print("kp err:", meanError-meanPreerror, " ki err:", meanError, "kd err:", meanError - 2*meanPreerror +meanPre2error)
+        print("kp err:", meanError-meanPreerror, " ki err:", meanError, "kd err:", meanError -2*meanPreerror +meanPre2error)
         
-        #nextBear = Kp * (meanError - meanPreerror) +  Ki * delay * meanError + (Kd / delay) * (meanError - 2 * meanPreerror + meanPre2error) + bearList[-1]
-        nextBear = Kp * (error)
+        nextBear = direction*(Kp * (meanError - meanPreerror) +  Ki * delay * meanError + (Kd / delay) * (meanError - 2 * meanPreerror + meanPre2error)) + bearList[-1]
+        #nextBear = Kp * (error)
     
     if(nextBear > upperRudLim):
         nextBear = upperRudLim
@@ -68,5 +67,7 @@ def bearController(bear, refbear):
         nextBear = lowerRudLim
         
     bearList.append(nextBear)
+
+    #nextBear *= direction
 
     return nextBear, meanError

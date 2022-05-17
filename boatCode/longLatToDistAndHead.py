@@ -138,7 +138,23 @@ def obtainValues(data,ref):
     #print('Distance in meters: ', distance)
     #print('Bearing relative to north in degrees: ', bearing)
     
+<<<<<<< Updated upstream
     return distance, bearing
+=======
+packet1 = "$GPGGA,092826.030,5700.741,N,00954.640,E,1,12,1.0,0.0,M,0.0,M,,*60"
+packet2 = "$GPGGA,092826.035,5700.747,N,00954.640,E,1,12,1.0,0.0,M,0.0,M,,*63"
+refmsgNMEA = gpgga(packet1) #sorts the data
+refmsgDec = NMEAtoDec(refmsgNMEA.lat,refmsgNMEA.lat_dir,refmsgNMEA.lon,refmsgNMEA.lon_dir) #converts lat and lon from NMEA to decimal coordinates
+msgNMEA = gpgga(packet2)
+msgDec = NMEAtoDec(msgNMEA.lat,msgNMEA.lat_dir,msgNMEA.lon,msgNMEA.lon_dir)
+
+distance = refDistance(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #2698.09m from nmeagenerator
+bearing = refBearing(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #98.06° from nmeagenerator
+print('Reference point in decimal coordinates: ', refmsgDec.lat, refmsgDec.lon)
+print('Current point in decimal coordinates: ', msgDec.lat, ' ', msgDec.lon)
+print('Distance in meters: ', distance)
+print('Bearing relative to north in degrees: ', bearing)
+>>>>>>> Stashed changes
 
 
 
