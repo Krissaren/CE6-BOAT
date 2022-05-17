@@ -10,7 +10,8 @@ from rudController import *
 from testgpsOurVersion import testtalkerGps
 
 if __name__ == '__main__':
-    refPointThrot, refPointRud = 0 #postion in the array of reference points
+    refPointThrot = 0
+    refPointRud = 0 #postion in the array of reference points
     #totvel = 0 #imu velocity
     finalThrot = 0
     finalRud = 0
@@ -43,7 +44,7 @@ if __name__ == '__main__':
         while(1):            
             
             if(gpsPort.in_waiting > 44):
-                distThrot, distRud, bear, refbearThrot, refbearRud, gpsvel = talkerGps(fGps1, fGps2, pointList, refPointThrot, refPointRud)
+                distThrot, distRud, bear, refbearThrot, refbearRud, gpsvel = testtalkerGps(fGps1, fGps2, pointList, refPointThrot, refPointRud)
                 if(distThrot != None):
                     distRef = distController(distThrot)
                 

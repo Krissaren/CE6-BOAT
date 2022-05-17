@@ -17,14 +17,14 @@ class coord:
 def createPointList():
     #Code for the path planning and returns a list with all the points (lon,lat)
     global pointList
-    """"
-    point1 = coord(57.01539629252578, 9.98564989072194)
-    point2 = coord(57.01516682319637, 9.985626960136996)
-    point3 = coord(57.01516843296847, 9.985073880152662)
+    """
+    point1 = coord(57.05527136170495, 9.872023706536067)
+    point2 = coord(57.054952465119996, 9.872630040159056)
     
     
     
-    pointList = [point1, point2, point3]
+    
+    pointList = [point1, point2]
     """
     #far away
     """ 
@@ -40,16 +40,16 @@ def createPointList():
     point10 = coord(57.04706050191412, 9.848483961156115)
     """
     #close to harbour
-    point1 = coord(57.05674761452483, 9.869521301832231)
-    point2 = coord(57.05656095876593, 9.869522767231796)
-    point3 = coord(57.05656189018057, 9.869174395743482)
-    point4 = coord(57.056923103724536, 9.86918784303395)
-    point5 = coord(57.05691977619669, 9.86985469104046)
-    point6 = coord(57.05638009013941, 9.869852008475654)
-    point7 = coord(57.05638201454456, 9.868854384768735)
-    point8 = coord(57.057102979388915, 9.868870516287982)
-    point9 = coord(57.05710443697757, 9.870190921928982)
-    point10 = coord(57.05619920893293, 9.870182826282743)
+    point10 = coord(57.05674761452483, 9.869521301832231)
+    point9 = coord(57.05656095876593, 9.869522767231796)
+    point8 = coord(57.05656189018057, 9.869174395743482)
+    point7 = coord(57.056923103724536, 9.86918784303395)
+    point6 = coord(57.05691977619669, 9.86985469104046)
+    point5 = coord(57.05638009013941, 9.869852008475654)
+    point4 = coord(57.05638201454456, 9.868854384768735)
+    point3 = coord(57.057102979388915, 9.868870516287982)
+    point2 = coord(57.05710443697757, 9.870190921928982)
+    point1 = coord(57.05619920893293, 9.870182826282743)
     
     pointList = [point1, point2, point3, point4, point5, point6, point7, point8, point9, point10]
     

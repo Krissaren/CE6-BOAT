@@ -12,7 +12,7 @@ velList = []
 delay = 0.05
 
 opVelLim = 2.46
-upperThrotLim = 5227
+upperThrotLim = 2000
 lowerThrotLim = 0
 
 def distController(dist): 

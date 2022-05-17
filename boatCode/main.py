@@ -67,7 +67,7 @@ if __name__ == '__main__':
             dist, bear, vel = oldtalkerGps(file, pointList, count)
             count += 2
             """
-               
+            
             if(imuPort.in_waiting > 39):
                 talkerImu(fImu1, fImu2, fImu3)
                 #totvel += imuVel

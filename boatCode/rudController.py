@@ -1,5 +1,5 @@
 #Constants declaration
-Kp = 5200
+Kp = 700
 Ki = 200
 Kd = 5000
 
@@ -9,15 +9,15 @@ refbearList = []
 
 delay = 0.05
 
-upperRudLim = 60000
-lowerRudLim = -60000
+upperRudLim = 80000
+lowerRudLim = -80000
 
 
 def bearController(bear, refbear):   
     inBearList.append(bear)
     refbearList.append(refbear)
-
-    if len(bearList) < 5:
+    meanError = 0
+    if len(bearList) < 10:
         nextBear = 0
         
     else:
@@ -28,29 +28,38 @@ def bearController(bear, refbear):
         error = refbearList[refbearLen] - inBearList[inBearLen]
         preerror = refbearList[refbearLen - 1] - inBearList[inBearLen - 1]
         pre2error = refbearList[refbearLen - 2] - inBearList[inBearLen - 2]
-
-        if error > 180:
-            error = -360 + error
+        pre3error = refbearList[refbearLen - 3] - inBearList[inBearLen - 3]
+        pre4error = refbearList[refbearLen - 4] - inBearList[inBearLen - 4]
+        pre5error = refbearList[refbearLen - 5] - inBearList[inBearLen - 5]
+        pre6error = refbearList[refbearLen - 6] - inBearList[inBearLen - 6]
+        pre7error = refbearList[refbearLen - 7] - inBearList[inBearLen - 7]
+        pre8error = refbearList[refbearLen - 8] - inBearList[inBearLen - 8]
+        pre9error = refbearList[refbearLen - 9] - inBearList[inBearLen - 9]
+        meanError = (error + preerror + pre2error + pre3error + pre4error + pre5error + pre6error +pre7error)/8
+        meanPreerror = (preerror + pre2error + pre3error +pre4error +pre5error + pre6error + pre7error + pre8error)/8
+        meanPre2error = (pre2error + pre3error + pre4error +pre5error + pre6error + pre7error + pre8error + pre9error)/8
+        if meanError > 180:
+            meanError = -360 + meanError
             
-        elif error < -180:
-            error = 360 + error
+        elif meanError < -180:
+            meanError = 360 + meanError
             
-        if preerror > 180:
-            preerror = -360 + preerror
+        if meanPreerror > 180:
+            meanPreerror = -360 + meanPreerror
             
-        elif preerror < -180:
-            preerror = 360 + preerror
+        elif meanPreerror < -180:
+            meanPreerror = 360 + meanPreerror
             
-        if pre2error > 180:
-            pre2error = -360 + pre2error
+        if meanPre2error > 180:
+            meanPre2error = -360 + meanPre2error
             
-        elif preerror < -180:
-            pre2error = 360 + pre2error
+        elif meanPreerror < -180:
+            meanPre2error = 360 + meanPre2error
             
-        #print("bear error:", error)
+        print("kp err:", meanError-meanPreerror, " ki err:", meanError, "kd err:", meanError -2*meanPreerror +meanPre2error)
         
-        nextBear = Kp * (error - preerror) +  Ki * delay * error + (Kd / delay) * (error - 2 * preerror + pre2error) + inBearList[-1]
-        #nextBear = Kp * (error)
+        #nextBear = Kp * (meanError - meanPreerror) +  Ki * delay * meanError + (Kd / delay) * (meanError - 2 * meanPreerror + meanPre2error) + bearList[-1]
+        nextBear = Kp * (error)
     
     if(nextBear > upperRudLim):
         nextBear = upperRudLim
@@ -60,4 +69,4 @@ def bearController(bear, refbear):
         
     bearList.append(nextBear)
 
-    return nextBear, error
+    return nextBear, meanError
