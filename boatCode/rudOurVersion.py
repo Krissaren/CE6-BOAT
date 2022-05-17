@@ -41,4 +41,4 @@ def talkerRud(f1):
     
 def setRudPos(enc):
 	enc = str(int(enc))
-	rudPort.write(bytes(enc, 'utf-8'))
+	rudPort.write(bytes(enc + "A", 'utf-8'))
