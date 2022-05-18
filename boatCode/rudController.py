@@ -1,11 +1,12 @@
 #Constants declaration
-Kp = 2700
-Ki = 200
-Kd = 2500
+Kp = 5400
+Ki = 400
+Kd =5000
 
 inBearList = []
 bearList = []
 refbearList = []
+newPoint = 0
 
 delay = 0.05
 
@@ -13,7 +14,8 @@ upperRudLim = 80000
 lowerRudLim = -80000
 
 
-def bearController(bear, refbear):   
+def bearController(bear, refbear):  
+    global newPoint 
     inBearList.append(bear)
     refbearList.append(refbear)
     meanError = 0
@@ -25,7 +27,17 @@ def bearController(bear, refbear):
         inBearLen = len(inBearList) - 1
         refbearLen = len(refbearList) - 1
         #print("refbear:", refbearList[-1])
-        
+        if(newPoint == 2):
+            refbearList[1] = refbearList[0]
+            refbearList[2] = refbearList[0]
+            refbearList[3] = refbearList[0]
+            refbearList[4] = refbearList[0]
+            refbearList[5] = refbearList[0]
+            refbearList[6] = refbearList[0]
+            refbearList[7] = refbearList[0]
+            refbearList[8] = refbearList[0]
+            refbearList[9] = refbearList[0]
+            newPoint = 0
         error = refbearList[refbearLen] - inBearList[inBearLen]
         preerror = refbearList[refbearLen - 1] - inBearList[inBearLen - 1]
         pre2error = refbearList[refbearLen - 2] - inBearList[inBearLen - 2]
@@ -36,9 +48,17 @@ def bearController(bear, refbear):
         pre7error = refbearList[refbearLen - 7] - inBearList[inBearLen - 7]
         pre8error = refbearList[refbearLen - 8] - inBearList[inBearLen - 8]
         pre9error = refbearList[refbearLen - 9] - inBearList[inBearLen - 9]
+        
+        """#
         meanError = (error + preerror + pre2error + pre3error + pre4error + pre5error + pre6error +pre7error)/8
         meanPreerror = (preerror + pre2error + pre3error +pre4error +pre5error + pre6error + pre7error + pre8error)/8
         meanPre2error = (pre2error + pre3error + pre4error +pre5error + pre6error + pre7error + pre8error + pre9error)/8
+        """
+        meanError = (error + preerror + pre2error + pre3error )/4
+        meanPreerror = (preerror + pre2error + pre3error +pre4error )/4
+        meanPre2error = (pre2error + pre3error + pre4error +pre5error )/4
+        
+
         if meanError > 180:
             meanError = -360 + meanError
             

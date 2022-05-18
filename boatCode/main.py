@@ -61,6 +61,7 @@ if __name__ == '__main__':
                             final += 1
                         else:
                             refPoint += 1
+                            newPoint = 1
             
             """
             #Code for reading old data
