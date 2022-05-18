@@ -28,7 +28,7 @@ Encoder myEnc(2, 3);
 unsigned long previousMillis = 0;
 int squareCount = 0;
 
-const long looptime = 40;  // looptime in ms.
+const long looptime = 50;  // looptime in ms.
 long setpoint = 0;
 float pgain = 0.05;
 float calcedPWM = 0;
