@@ -19,7 +19,11 @@ def bearController(bear, refbear):
     inBearList.append(bear)
     refbearList.append(refbear)
     meanError = 0
+<<<<<<< Updated upstream
     error = 0
+=======
+    
+>>>>>>> Stashed changes
     if len(bearList) < 10:
         nextBear = 0
         
@@ -83,7 +87,11 @@ def bearController(bear, refbear):
         elif error < -180:
             error = 360 + error
             
+<<<<<<< Updated upstream
         print("kp err:", meanError-meanPreerror, " ki err:", meanError, "kd err:", meanError - 2*meanPreerror +meanPre2error)
+=======
+        print("kp err:", meanError-meanPreerror, " ki err:", meanError, "kd err:", meanError - 2 * meanPreerror + meanPre2error)
+>>>>>>> Stashed changes
         
         nextBear = Kp * (meanError - meanPreerror) +  Ki * delay * meanError + (Kd / delay) * (meanError - 2 * meanPreerror + meanPre2error) + bearList[-1]
         #nextBear = Kp * (error)
