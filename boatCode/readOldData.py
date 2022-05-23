@@ -4,7 +4,7 @@ from obtainVel import *
 old_serial_data = []
 
 def readOldData():    
-    file1 = open("throt15065E.txt", "r")
+    file1 = open("throt15065E.txt", "r") #Name of the file in "name.txt" format
     line = file1.readline()
     cnt = 1
 

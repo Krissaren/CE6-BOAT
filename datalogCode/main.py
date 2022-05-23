@@ -1,14 +1,14 @@
-import string
 import time
-import numpy as np
-import serial
 import os.path
 from datetime import datetime
-from rudOurVersion import *
-from throtOurVersion import *
+
+from rud import *
+from throt import *
+
 time.sleep(3)
-from imuOurVersion import *
-from gpsOurVersion import * 
+
+from imu import *
+from gps import * 
 
 i = 1
 
@@ -38,11 +38,7 @@ if __name__ == '__main__':
     fImu3 = open(fImu3, "a")
     fRud1 = open(fRud1, "a")
     fThrot1 = open(fThrot1, "a")
-    #setRudPos("40000")
-    #setThrotPos("10000")
-    #time.sleep(2)
-    #setRudPos("0")
-    #setThrotPos("0")
+
     try:
         while(1):
             now = datetime.now()
@@ -50,9 +46,6 @@ if __name__ == '__main__':
             talkerImu(fImu1, fImu2, fImu3)
             #talkerRud(fRud1)
             #talkerThrot(fThrot1)
-            
-            
-            
             #print(str(now.hour) + " " + str(now.minute) + " " + str(now.second) + " " + str(now.microsecond))
 
     except KeyboardInterrupt: 
@@ -63,6 +56,3 @@ if __name__ == '__main__':
         fImu3.close()
         fRud1.close()
         fThrot1.close()
-        #print("Files closed correctly")
-
-    

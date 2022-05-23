@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import serial
 import os.path
+import munpy as np
+import time as t
 
 from longLatToDistAndHead import *
 from obtainVel import *
@@ -33,6 +35,7 @@ def next(string, number):
         index2 = string.find(",",index2)
 
     return string[index1:index2]
+
 class msg_gpvtg1:
     time = np.uint64 
 

@@ -26,8 +26,6 @@ def distController(dist):
     return nextDist
     
 def velController(vel):
-                        #Like this if velController its called after distController, 
-                        #if not add dist as a input variable of the function
     inVelList.append(vel)
           
     if len(distList) < 5:
@@ -51,4 +49,4 @@ def velController(vel):
     
     velList.append(nextVel)
     
-    return nextVel + 9000 #addind the offset
+    return nextVel + 9000 # Adding the offset for being on the range

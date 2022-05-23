@@ -1,16 +1,15 @@
 import time as t
 import os.path
 
-from rudOurVersion import *
-from throtOurVersion import *
+from rud import *
+from throt import *
 
-t.sleep(3)
+t.sleep(3) # Timeout for the right setup of the Arduino's
 
-from imuOurVersion import *
-from gpsOurVersion import * 
+from imu import *
+from gps import * 
 
-#Definition global variables
-i = 1
+i = 1 # Definition global variables
 
 def makeFolder():
     global i
@@ -22,7 +21,6 @@ def makeFolder():
             f=1 
         except:
             i += 1
-
 
 def mainLog():
     makeFolder()

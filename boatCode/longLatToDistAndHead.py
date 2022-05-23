@@ -57,7 +57,6 @@ def refBearing(lat2, lon2, lat1, lon1):
     return math.fmod((theta + 360), 360)
 
 def gpgga(data):
-    #string = data.decode('UTF-8') #it's already decoded
     string = data
 
     index1 = 0
@@ -120,18 +119,13 @@ def NMEAtoDec(lat, lat_dir, lon, lon_dir): #DDMM.MMMMM
     return coord(varLat,varLon)
     
 def obtainValues(data,ref):
-    #packet1 = "$GPGGA,092826.030,5700.891,N,00959.195,E,1,12,1.0,0.0,M,0.0,M,,*60"
-    #packet2 = "$GPGGA,092826.035,5700.526,N,01001.784,E,1,12,1.0,0.0,M,0.0,M,,*67"
-    
-    #refmsgNMEA = gpgga(ref) #sorts the data
-    #refmsgDec = NMEAtoDec(refmsgNMEA.lat,refmsgNMEA.lat_dir,refmsgNMEA.lon,refmsgNMEA.lon_dir) #converts lat and lon from NMEA to decimal coordinates
     refmsgDec = ref
     
     msgNMEA = gpgga(data)
     msgDec = NMEAtoDec(msgNMEA.lat,msgNMEA.lat_dir,msgNMEA.lon,msgNMEA.lon_dir)
       
-    distance = refDistance(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #2698.09m from nmeagenerator
-    bearing = refBearing(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon) #98.06° from nmeagenerator
+    distance = refDistance(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon)
+    bearing = refBearing(refmsgDec.lat, refmsgDec.lon, msgDec.lat, msgDec.lon)
     
     #print('Reference point in decimal coordinates: ', refmsgDec.lat, refmsgDec.lon)
     #print('Current point in decimal coordinates: ', msgDec.lat, ' ', msgDec.lon)

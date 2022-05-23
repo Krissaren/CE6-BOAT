@@ -8,19 +8,12 @@ from throtController import *
 from rudController import *
 
 if __name__ == '__main__':
-    refPoint = 0 #postion in the array of reference points
-    #totvel = 0 #imu velocity
-    final = 0
+    refPoint = 0 # Variable for the postion in the array of reference points
+    #totvel = 0 # Variable for the IMU velocity
+    final = 0 # Variable to chechk if the search pattern is completly done
     
     pointList = createPointList()
-    
-    """
-    #Code for setup in the center the rudder
-    setupRud()
-    
-    t.sleep(15) #delay to set the Rudder in the center (15 from the left and 11.4 from the right)
-    """
-    
+       
     fGps1, fGps2, fImu1, fImu2, fImu3, fRud1, fThrot1, fextra = mainLog()
     
     """
@@ -44,11 +37,9 @@ if __name__ == '__main__':
                     gpsvel = 0
                 
                 velRef = velController(gpsvel)
-                #print("Encoder value throttle: ", velRef)
                 setThrotPos(velRef)
                 
                 bearRef, error = bearController(bear, refbear)
-                #print("Encoder value rudder: ", bearRef)
                 setRudPos(bearRef)
                 
                 print("Distance: ",dist," Bearing: ",bear, " Ref bear", refbear, " Velocity: ",gpsvel," Point: ",refPoint, " Encoder value throttle: ", velRef, " Encoder value rudder: ", bearRef, " Bearing error: ", error)
@@ -81,23 +72,9 @@ if __name__ == '__main__':
             
             if(throtPort.in_waiting > 5):
                 talkerThrot(fThrot1)
-          
-            #Code while developing, remove at the end
-            currentTime = t.time()
-            print("time", currentTime)
-            if(currentTime - start > 0.05):
-                if(dist != None):
-                    distRef = distController(dist)
-                velRef = velController(vel)
-                print("Distance:",dist,", Bearing:",bear,", Velocity:",vel,", Point:",refPoint)
-                print("Encoder value throttle: ", velRef)
-                #print("hallo000000000000000000000", currentTime-start)
-                start = currentTime
-                setThrotPos(velRef)
-                #print("buffffffffffffer", throtPort.out_waiting)
             """
             
-    except KeyboardInterrupt: 
+    except (KeyboardInterrupt, final == 1): # End the execution went Ctrl+C is pressed or when the search pattern is done
 
         fGps1.close()
         fGps2.close()
@@ -106,7 +83,3 @@ if __name__ == '__main__':
         fImu3.close()
         fRud1.close()
         fThrot1.close()
-
-        #print("Files closed correctly")
-
-    

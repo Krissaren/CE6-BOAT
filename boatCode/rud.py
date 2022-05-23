@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-import time as t
 import serial
 import numpy as np
 import os.path
@@ -17,21 +15,7 @@ def logdataRud(i):
 	
 def serial_reader():
 	a = rudPort.readline()
-	#print(a)
 	return a
-
-def format(data):
-	#print(data)
-	msg = motordata()
-	msg.time = int(round(t.time() * 1000))
-
-	try:
-	    msg.encoder = int(data)
-	except:
-	    msg.encoder = set_point
-
-	msg.set_point = set_point
-	return msg
 
 def talkerRud(f1):
 	serial_data = serial_reader()

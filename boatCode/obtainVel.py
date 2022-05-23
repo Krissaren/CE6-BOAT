@@ -32,7 +32,6 @@ def gpvtg(data):
 
 def obtainVel(data):
     msgVel = gpvtg(data)
-    
     #print('Velocity in meters/seconds: ', msgVel.vel)
     
     return msgVel.vel
