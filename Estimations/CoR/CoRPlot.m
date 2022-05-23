@@ -7,7 +7,9 @@ gyro=load('gyroImuData6.txt');
 accTot=(acc(:,5)+acc(:,6)+acc(:,7)-1);
 gyroTot=gyro(:,5)+ gyro(:,6)+ gyro(:,7);
 x = linspace(0, 22385, 22385);
+
 yyaxis right
+
 plot(round(x/125,2),round(gyroTot,2))
 ylim([-2 4])
 ylabel('Incremental angle [°]')

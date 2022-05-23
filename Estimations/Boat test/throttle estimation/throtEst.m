@@ -21,7 +21,7 @@ plot((A2(:,2)-A2(1,2))/1000,A2(:,1)/10000)
 hold on
 plot(t,B)
 xlabel('Time [s]') 
-ylabel('Amplitude') 
+ylabel('Encoder value') 
 grid on
 xlim([0 6])
 ylim([0 1.2])
@@ -36,7 +36,7 @@ plot((A2(:,2)-A2(1,2))/1000,A2(:,1)/10000)
 plot((A3(:,2)-A3(1,2))/1000,A3(:,1)/15000)
 plot((A4(:,2)-A4(1,2))/1000,A4(:,1)/20000)
 xlabel('Time [s]') 
-ylabel('Amplitude') 
+ylabel('Encoder value') 
 grid on
 xlim([0 6])
 ylim([0 1.2])
